@@ -6,7 +6,7 @@ function checkForValidUrl(tabId, changeInfo, tab) {
 	var	matchExpression	= /^(http:\/\/)?www.destructoid.com\/blogs\/.+/,
 		urlMatches	= matchExpression.test(tab.url);
 
-	if (urlMatches) {
+	if (urlMatches || true) {
 		
 		chrome.pageAction.show(tabId);
 	}

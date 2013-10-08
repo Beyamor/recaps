@@ -126,6 +126,14 @@ function createSelector(options, onChange) {
 	return selector;
 }
 
+function createTextfield() {
+
+	var text = document.createElement("input");
+	text.setAttribute("type", "text");
+
+	return text;
+};
+
 
 if (!document.getElementById("wits-recap-widget")) {
 
@@ -155,11 +163,16 @@ if (!document.getElementById("wits-recap-widget")) {
 		else {
 
 			subcategories = createSelector(SUBCATEGORIES[value]);
+			setStyle(subcategories, {display: "block"});
 			categoriesContainer.appendChild(subcategories);
 		}
 	});
 	setStyle(categories, {display: "block"});
 	categoriesContainer.appendChild(categories);
+
+	var description = createTextfield();
+	setStyle(description, {display: "block"});
+	widget.appendChild(description);
 
 	var closeButton = createButton("cancel", function() {
 
