@@ -227,7 +227,8 @@ if (!document.getElementById("wits-recap-widget")) {
 		var result = {
 			description: description.value,
 			category: categories.value,
-			subcategory: (subcategories? subcategories.value : null)
+			subcategory: (subcategories? subcategories.value : null),
+			url: window.location.href
 		};
 
 		postJSON({

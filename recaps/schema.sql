@@ -4,5 +4,6 @@ create table posted_entries (
 	recapper text not null,
 	category text not null,
 	subcategory text,
-	description text not null
+	description text not null,
+	url text not null
 );
