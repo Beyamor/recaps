@@ -165,7 +165,7 @@ function post(args) {
 				args.onSuccess(request.responseText);
 
 			if (request.status != 200 && args.onFailure)
-				args.onFailure(request.responseText);
+				args.onFailure(request.status);
 		}
 	};
 
@@ -234,6 +234,9 @@ if (!document.getElementById("wits-recap-widget")) {
 			data: result,
 			onSuccess: function() {
 				close();
+			},
+			onFailure: function(errorCode) {
+				alert("Something broke!\nGo tell Beyamor you got a " + errorCode);
 			}
 		});
 	});
