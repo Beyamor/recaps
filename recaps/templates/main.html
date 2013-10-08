@@ -2,13 +2,14 @@
 <html lang="en">
 	<head>
 		<title>Recaps</title>
+		<link rel="stylesheet" type="text/css" href="/static/css/main.css">
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 		<script type="text/javascript" src="/static/js/underscore.js"></script>
 		<script type="text/javascript" src="/static/js/backbone.js"></script>
 	</head>
 	<body>
-		<div id="login-widget">
-			<p>Please sign in:</p>
+		<div id="login-widget" class="container">
+			<p>Sign in:</p>
 			<select class="recapper">
 				{% for recapper in recappers %}
 					<option value="{{ recapper }}">{{ recapper }}</option>
