@@ -19,6 +19,21 @@ function createButton(label, onClick) {
 	return button;
 };
 
+function createSelector(options) {
+
+	var selector = document.createElement("select");
+	for (var optionIndex = 0; optionIndex < options.length; ++optionIndex) {
+
+		var option = document.createElement("option");
+		option.textContent = options[optionIndex];
+		option.setAttribute("value", options[optionIndex]);
+
+		selector.appendChild(option);
+	}
+
+	return selector;
+}
+
 
 if (!document.getElementById("wits-recap-widget")) {
 
@@ -30,7 +45,19 @@ if (!document.getElementById("wits-recap-widget")) {
 		top: "0px"
 	});
 
-	closeButton = createButton("cancel", function() {
+	var categories = createSelector([
+		"topsaucetoid",
+		"wordtoid",
+		"contestoid",
+		"communitoid",
+		"gametoid",
+		"culturoid",
+		"otheroid",
+		"failtoid"
+	]);
+	widget.appendChild(categories);
+
+	var closeButton = createButton("cancel", function() {
 
 		document.body.removeChild(widget);
 	});
