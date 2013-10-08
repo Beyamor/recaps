@@ -186,9 +186,10 @@ if (!document.getElementById("wits-recap-widget")) {
 	setAsBlock(confirmButton);
 	widget.appendChild(confirmButton);
 
-	var closeButton = createButton("Cancel", function() {
+	var closeButton = createButton("Close", function() {
 
-		document.body.removeChild(widget);
+		if (description.value.length == 0 || confirm("Stop recapping?\n(press cancel to keep recapping)"))
+			document.body.removeChild(widget);
 	});
 	setAsBlock(closeButton);
 	widget.appendChild(closeButton);
