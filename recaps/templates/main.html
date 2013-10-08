@@ -8,14 +8,18 @@
 		<script type="text/javascript" src="/static/js/backbone.js"></script>
 	</head>
 	<body>
-		<div id="login-widget" class="container">
-			<p>Sign in:</p>
-			<select class="recapper">
-				{% for recapper in recappers %}
-					<option value="{{ recapper['id'] }}">{{ recapper['name'] }}</option>
-				{% endfor %}
-			</select>
-			<button type="button">Go</button>
+		<div id="login-widget">
+			<div class="blocker">
+			</div>
+			<div class="main container">
+				<p>Sign in:</p>
+				<select class="recapper">
+					{% for recapper in recappers %}
+						<option value="{{ recapper['id'] }}">{{ recapper['name'] }}</option>
+					{% endfor %}
+				</select>
+				<button type="button">Go</button>
+			</div>
 		</div>
 	</body>
 </html>

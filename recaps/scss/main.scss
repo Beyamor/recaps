@@ -42,23 +42,35 @@ select, button {
 }
 
 #login-widget {
-	margin-top: 200px;
-	@include centered;
-	width: 200px;
-	padding: 20px 10px;
-	background-color: #ddd;
-	@include round-corners;
-
-	p {
-		margin: 0px;
-		margin-bottom: 15px;
+	.blocker {
+		background-color: rgba(0, 0, 0, 0.8);
+		position: fixed;
+		left: 0px;
+		right: 0px;
+		top: 0px;
+		bottom: 0px;
 	}
 
-	select {
+	.main {
+		position: relative;
+		margin-top: 200px;
 		@include centered;
-	}
+		width: 200px;
+		padding: 20px 10px;
+		background-color: #ddd;
+		@include round-corners;
 
-	button {
-		float: right;
+		p {
+			margin: 0px;
+			margin-bottom: 15px;
+		}
+
+		select {
+			@include centered;
+		}
+
+		button {
+			float: right;
+		}
 	}
 }
