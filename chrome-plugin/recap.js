@@ -164,6 +164,8 @@ if (!document.getElementById("wits-recap-widget")) {
 		top: "0px"
 	});
 
+	var close = function() { document.body.removeChild(widget); }
+
 	var categoriesContainer = document.createElement("div");
 	widget.appendChild(categoriesContainer);
 
@@ -207,6 +209,7 @@ if (!document.getElementById("wits-recap-widget")) {
 			subcategory: (subcategories? subcategories.value : null)
 		};
 		console.log(result);
+		close();
 	});
 	confirmButton.disabled = true;
 	setAsBlock(confirmButton);
@@ -215,7 +218,7 @@ if (!document.getElementById("wits-recap-widget")) {
 	var closeButton = createButton("Close", function() {
 
 		if (description.value.length == 0 || confirm("Stop recapping?\n(press cancel to keep recapping)"))
-			document.body.removeChild(widget);
+			close();
 	});
 	setAsBlock(closeButton);
 	widget.appendChild(closeButton);
