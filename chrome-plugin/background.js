@@ -20,6 +20,6 @@ chrome.tabs.onUpdated.addListener(checkForValidUrl);
 chrome.pageAction.onClicked.addListener(function(tab) {
 
 	chrome.tabs.executeScript({
-		code: 'document.body.style.backgroundColor="red"'
+		file: "recap.js"
 	});
 });
