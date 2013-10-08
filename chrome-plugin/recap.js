@@ -46,11 +46,11 @@ var SUBCATEGORIES = {
 	],
 
 	Culturoid: [
-		"Art",
-		"Music",
-		"Film/TV",
-		"Literature",
-		"Swag"
+		["A", "Art"],
+		["M", "Music"],
+		["F", "Film/TV"],
+		["L", "Literature"],
+		["S", "Swag"]
 	],
 
 	Otheroid: [
@@ -140,10 +140,23 @@ if (!document.getElementById("wits-recap-widget")) {
 	var categoriesContainer = document.createElement("div");
 	widget.appendChild(categoriesContainer);
 
+	var subcategories = null;
+
 	var categories = createSelector(CATEGORIES, function(value) {
-		var div = document.createElement("div");
-		div.textContent = value;
-		widget.appendChild(div);
+
+		if (subcategories)
+			categoriesContainer.removeChild(subcategories);
+
+		if (value == "Topsaucetoid") {
+
+			subcategories = null;
+		}
+
+		else {
+
+			subcategories = createSelector(SUBCATEGORIES[value]);
+			categoriesContainer.appendChild(subcategories);
+		}
 	});
 	setStyle(categories, {display: "block"});
 	categoriesContainer.appendChild(categories);
