@@ -181,7 +181,12 @@ if (!document.getElementById("wits-recap-widget")) {
 
 	var confirmButton = createButton("Recap", function() {
 
-		console.log("doing eet");
+		var result = {
+			description: description.value,
+			category: categories.value,
+			subcategory: (subcategories? subcategories.value : null)
+		};
+		console.log(result);
 	});
 	setAsBlock(confirmButton);
 	widget.appendChild(confirmButton);
