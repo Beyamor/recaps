@@ -1,6 +1,6 @@
 import json
 import sqlite3
-from flask import Flask, Response, request, g
+from flask import Flask, Response, request, g, render_template
 from contextlib import closing
 
 # default configuration junk
@@ -58,6 +58,10 @@ def show_entries():
 			})
 
 	return str(entries)
+
+@app.route("/")
+def get_main():
+	return render_template("main.html")
 
 if __name__ == "__main__":
 	app.run(debug=True)
