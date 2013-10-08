@@ -61,7 +61,8 @@ def show_entries():
 
 @app.route("/")
 def get_main():
-	return render_template("main.html")
+	recappers = ["beyamor"]
+	return render_template("main.html", recappers=recappers)
 
 if __name__ == "__main__":
 	app.run(debug=True)
