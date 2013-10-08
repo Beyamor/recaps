@@ -1,3 +1,4 @@
+import json
 import sqlite3
 from flask import Flask, Response, request, g
 from contextlib import closing
@@ -31,9 +32,11 @@ def teardown_request(exception):
 
 @app.route("/recap-entry", methods=["POST"])
 def post_recap_entry():
-	with open("/tmp/recap-entry", "w") as recap_file:
-		recap_file.write(request.data)
-	return "Got it"
+	entry = json.loads(request.data)
+	g.db.execute("insert into posted_entries (recapper, category, subcategory, description) values (?, ?, ?, ?)",
+			["beyamor", entry["category"], entry["subcategory"], entry["description"]])
+	g.db.commit()
+	return "Good jorb"
 
 @app.route("/show-entries")
 def show_entries():
