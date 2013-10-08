@@ -131,10 +131,24 @@ function createSelector(options, onChange) {
 	return selector;
 }
 
-function createTextfield() {
+function createTextfield(onChange) {
 
 	var text = document.createElement("input");
-	text.setAttribute("type", "text");
+	text.type = "text";
+
+	if (onChange) {
+
+		var oldValue = text.value;
+
+		setInterval(function() {
+
+			if (oldValue != text.value) {
+
+				oldValue = text.value;
+				onChange(text.value);
+			}
+		}, 100);
+	}
 
 	return text;
 };
@@ -175,11 +189,17 @@ if (!document.getElementById("wits-recap-widget")) {
 	setAsBlock(categories);
 	categoriesContainer.appendChild(categories);
 
-	var description = createTextfield();
+	// forward declaration so we can close over it
+	var confirmButton;
+
+	var description = createTextfield(function(value) {
+
+		confirmButton.disabled = (value.length == 0);
+	});
 	setAsBlock(description);
 	widget.appendChild(description);
 
-	var confirmButton = createButton("Recap", function() {
+	confirmButton = createButton("Recap", function() {
 
 		var result = {
 			description: description.value,
@@ -188,6 +208,7 @@ if (!document.getElementById("wits-recap-widget")) {
 		};
 		console.log(result);
 	});
+	confirmButton.disabled = true;
 	setAsBlock(confirmButton);
 	widget.appendChild(confirmButton);
 
