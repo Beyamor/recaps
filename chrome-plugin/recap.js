@@ -1,3 +1,14 @@
+var CATEGORIES = [
+	"topsaucetoid",
+	"wordtoid",
+	"contestoid",
+	"communitoid",
+	"gametoid",
+	"culturoid",
+	"otheroid",
+	"failtoid"
+];
+
 function setStyle(el, properties) {
 	
 	var style = "";
@@ -45,16 +56,7 @@ if (!document.getElementById("wits-recap-widget")) {
 		top: "0px"
 	});
 
-	var categories = createSelector([
-		"topsaucetoid",
-		"wordtoid",
-		"contestoid",
-		"communitoid",
-		"gametoid",
-		"culturoid",
-		"otheroid",
-		"failtoid"
-	]);
+	var categories = createSelector(CATEGORIES);
 	widget.appendChild(categories);
 
 	var closeButton = createButton("cancel", function() {
