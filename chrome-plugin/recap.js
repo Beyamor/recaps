@@ -153,6 +153,26 @@ function createTextfield(onChange) {
 	return text;
 };
 
+function post(args) {
+
+	var request = new XMLHttpRequest();
+
+	request.onreadystatechange = function() {
+
+		if (request.readyState == 4) {
+
+			if (request.status == 200 && args.onSuccess)
+				args.onSuccess(request.responseText);
+
+			if (request.status != 200 && args.onFailure)
+				args.onFailure(request.responseText);
+		}
+	};
+
+	request.open("POST", args.url, true);
+	request.send(args.data);
+};
+
 
 if (!document.getElementById("wits-recap-widget")) {
 
@@ -208,8 +228,14 @@ if (!document.getElementById("wits-recap-widget")) {
 			category: categories.value,
 			subcategory: (subcategories? subcategories.value : null)
 		};
-		console.log(result);
-		close();
+
+		post({
+			url: "http://localhost:5000/recap-entry",
+			data: result,
+			onSuccess: function() {
+				close();
+			}
+		});
 	});
 	confirmButton.disabled = true;
 	setAsBlock(confirmButton);

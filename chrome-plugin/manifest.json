@@ -18,6 +18,7 @@
 
 	"permissions": [
 		"tabs",
-		"activeTab"
+		"activeTab",
+		"http://localhost:5000/*"
 	]
 }

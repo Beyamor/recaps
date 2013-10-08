@@ -6,4 +6,4 @@ def post_recap_entry():
 	return "Got it", 200
 
 if __name__ == "__main__":
-	app.run()
+	app.run(debug=True)
