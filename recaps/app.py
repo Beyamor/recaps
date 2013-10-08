@@ -35,7 +35,7 @@ def post_recap_entry():
 	entry = json.loads(request.data)
 	g.db.execute("insert into posted_entries (recapper, category, subcategory, description, url) values (?, ?, ?, ?, ?)",
 			[
-				"beyamor",
+				"Beyamor",
 				entry["category"],
 				entry["subcategory"],
 				entry["description"],
@@ -61,7 +61,14 @@ def show_entries():
 
 @app.route("/")
 def get_main():
-	recappers = ["beyamor"]
+	cur = g.db.execute("select * from recappers")
+	recappers = []
+	for row in cur.fetchall():
+		recappers.append({
+			"id": row[0],
+			"name": row[1],
+			"header": row[2]
+			})
 	return render_template("main.html", recappers=recappers)
 
 if __name__ == "__main__":
