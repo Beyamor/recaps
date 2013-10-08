@@ -78,6 +78,11 @@ function setStyle(el, properties) {
 	el.setAttribute("style", style);
 };
 
+function setAsBlock(el) {
+
+	setStyle(el, {display: "block"});
+};
+
 function createButton(label, onClick) {
 
 	var button = document.createElement("button");
@@ -163,21 +168,29 @@ if (!document.getElementById("wits-recap-widget")) {
 		else {
 
 			subcategories = createSelector(SUBCATEGORIES[value]);
-			setStyle(subcategories, {display: "block"});
+			setAsBlock(subcategories);
 			categoriesContainer.appendChild(subcategories);
 		}
 	});
-	setStyle(categories, {display: "block"});
+	setAsBlock(categories);
 	categoriesContainer.appendChild(categories);
 
 	var description = createTextfield();
-	setStyle(description, {display: "block"});
+	setAsBlock(description);
 	widget.appendChild(description);
 
-	var closeButton = createButton("cancel", function() {
+	var confirmButton = createButton("Recap", function() {
+
+		console.log("doing eet");
+	});
+	setAsBlock(confirmButton);
+	widget.appendChild(confirmButton);
+
+	var closeButton = createButton("Cancel", function() {
 
 		document.body.removeChild(widget);
 	});
+	setAsBlock(closeButton);
 	widget.appendChild(closeButton);
 
 	document.body.appendChild(widget);
