@@ -153,9 +153,10 @@ function createTextfield(onChange) {
 	return text;
 };
 
-function post(args) {
+function postJSON(args) {
 
-	var request = new XMLHttpRequest();
+	var	request	= new XMLHttpRequest(),
+		data	= JSON.stringify(args.data);
 
 	request.onreadystatechange = function() {
 
@@ -170,7 +171,7 @@ function post(args) {
 	};
 
 	request.open("POST", args.url, true);
-	request.send(args.data);
+	request.send(data);
 };
 
 
@@ -229,7 +230,7 @@ if (!document.getElementById("wits-recap-widget")) {
 			subcategory: (subcategories? subcategories.value : null)
 		};
 
-		post({
+		postJSON({
 			url: "http://localhost:5000/recap-entry",
 			data: result,
 			onSuccess: function() {
