@@ -59,8 +59,8 @@ $ ->
 		render: ->
 			@$el.empty()
 
-			$img = $("img")
-			$img.attr("src", @header)
+			$img = $("<img>")
+			$img.attr("src", @attributes.header)
 			@$el.append $img
 
 			$el = @$el
@@ -80,14 +80,22 @@ $ ->
 
 		render: ->
 			$el = @$el
+			recaps = @model
+
 			$el.empty()
 
-			$recapperHeader = $("<img>").attr("src", @model.get("recapper").header)
+			$recapperHeader = $("<img>").attr("src", recaps.get("recapper").header)
 			$el.append $recapperHeader
 
+			$isms = $("<textarea>").change( ->
+				recaps.set "isms", $(this).val()
+			)
+			$el.append $isms
+
 			topsauceView = new CategoryView(
-				header: "http://farm3.static.flickr.com/2777/4068256421_cf820647b2_o.jpg",
-				model: @model.get("topsauce")
+				attributes:
+					header: "http://farm3.static.flickr.com/2777/4068256421_cf820647b2_o.jpg",
+				model: recaps.get("topsauce")
 			)
 			$el.append topsauceView.render().$el
 
