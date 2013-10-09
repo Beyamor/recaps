@@ -116,6 +116,8 @@ $ ->
 				subcategory: "*"
 				description: "Some topsauce"
 			)
+			@get("Topsauce").set("image",
+				"http://www.extremetech.com/wp-content/uploads/2012/02/red-panda-firefox-taking-a-break.jpg")
 
 			@set "isms", ""
 			@set "closingisms", ""
@@ -142,9 +144,17 @@ $ ->
 		render: ->
 			@$el.empty()
 
-			$img = $("<img>")
-			$img.attr("src", @attributes.header)
-			@$el.append $img
+			$header = $("<img>")
+			$header.attr("src", @attributes.header)
+			@$el.append $header
+
+			image = @model.get "image"
+			if image
+				$image = $("<img>").attr("src", image)
+				@$el.append $image
+
+			$addImage = $("<img>").attr("src", '/static/img/picture32.png')
+			@$el.append $addImage
 
 			$el = @$el
 			@model.get("entries").each (entry) ->
