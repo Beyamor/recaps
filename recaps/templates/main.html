@@ -9,6 +9,18 @@
 		<script type="text/javascript" src="/static/js/main.js"></script>
 	</head>
 	<body>
+		<script type="text/javascript">
+			recappers = {
+				{% for recapper in recappers %}
+					{{ recapper['id'] }}: {
+						header: "{{ recapper['header'] }}"
+					}
+				{% endfor %}
+			};
+		</script>
+		<div id="template">
+			<img id="header">
+		</div>
 		<div id="login-widget">
 			<div class="blocker">
 			</div>
