@@ -116,8 +116,6 @@ $ ->
 				subcategory: "*"
 				description: "Some topsauce"
 			)
-			@get("Topsauce").set("image",
-				"http://www.extremetech.com/wp-content/uploads/2012/02/red-panda-firefox-taking-a-break.jpg")
 
 			@set "isms", ""
 			@set "closingisms", ""
