@@ -65,13 +65,17 @@ $ ->
 		el: $('#recaps')
 
 		render: ->
-			@$el.empty()
+			$el = @$el
+			$el.empty()
+
+			$recapperHeader = $("<img>").attr("src", @model.get("recapper").header)
+			$el.append $recapperHeader
 
 			topsauceView = new CategoryView(
 				header: "http://farm3.static.flickr.com/2777/4068256421_cf820647b2_o.jpg",
 				model: @model.get("topsauce")
 			)
-			@$el.append topsauceView.render().$el
+			$el.append topsauceView.render().$el
 
 			return this
 	)
@@ -81,7 +85,11 @@ $ ->
 	recapper = null
 	for id of recappers
 		recapper = recappers[id] if recappers[id].name is "Beyamor"
-	recaps = new Recaps
+
+	recaps = new Recaps(
+		recapper: recapper
+	)
+
 	view = new RecapsView(
 			model: recaps
 		)

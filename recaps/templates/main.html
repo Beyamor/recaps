@@ -14,7 +14,8 @@
 			recappers = {
 				{% for recapper in recappers %}
 					{{ recapper['id'] }}: {
-						header: "{{ recapper['header'] }}"
+						header: "{{ recapper['header'] }}",
+						name: "{{ recapper['name'] }}"
 					}
 				{% endfor %}
 			};
