@@ -77,16 +77,26 @@ $ ->
 	)
 
 	$loginWidget = $('#login-widget')
-	$('button', $loginWidget).click ->
-		$loginWidget.remove()
-
-		id = $('select', $loginWidget).val()
-		recapper = new Recapper recappers[id]
-		$('#header').attr('src', recapper.get('header'))
-
-		recaps = new Recaps
-		view = new RecapsView(
+	$loginWidget.remove()
+	recapper = null
+	for id of recappers
+		recapper = recappers[id] if recappers[id].name is "Beyamor"
+	recaps = new Recaps
+	view = new RecapsView(
 			model: recaps
 		)
+	view.render()
 
-		view.render()
+	#$('button', $loginWidget).click ->
+	#	$loginWidget.remove()
+
+	#	id = $('select', $loginWidget).val()
+	#	recapper = new Recapper recappers[id]
+	#	$('#header').attr('src', recapper.get('header'))
+
+	#	recaps = new Recaps
+	#	view = new RecapsView(
+	#		model: recaps
+	#	)
+
+	#	view.render()
