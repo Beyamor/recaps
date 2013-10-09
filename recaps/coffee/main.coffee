@@ -36,6 +36,7 @@ $ ->
 			)
 			@set "topsauce", topsauce
 			@set "isms", ""
+			@set "closingisms", ""
 	)
 
 	EntryView = Backbone.View.extend(
@@ -87,10 +88,9 @@ $ ->
 			$recapperHeader = $("<img>").attr("src", recaps.get("recapper").header)
 			$el.append $recapperHeader
 
-			$isms = $("<textarea>").change( ->
+			$el.append $("<textarea>").change( ->
 				recaps.set "isms", $(this).val()
 			)
-			$el.append $isms
 
 			topsauceView = new CategoryView(
 				attributes:
@@ -98,6 +98,11 @@ $ ->
 				model: recaps.get("topsauce")
 			)
 			$el.append topsauceView.render().$el
+
+			$el.append $("<textarea>").change( ->
+				recaps.set "closingisms", $(this).val()
+			)
+
 
 			return this
 	)
