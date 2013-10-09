@@ -141,6 +141,48 @@ $ ->
 	CategoryView = Backbone.View.extend(
 		className: "category"
 
+		renderImage: ->
+			$imageContainer = $('<div>')
+			@$el.append $imageContainer
+
+			categoryImage = @model.get "image"
+
+			$image = $("<img>").attr("src", categoryImage).hide()
+			$addImage = $("<img>").attr("src", '/static/img/picture32.png').hide()
+			$imageInput = $('<input type="text">').val(categoryImage).hide()
+			$imageContainer.append($image).append($addImage).append($imageInput)
+
+			updateImage = =>
+				$imageInput.hide()
+
+				image = $imageInput.val()
+				@model.set "image", image
+
+				if image and image.length isnt 0
+					$image.attr("src", image).show()
+					$addImage.hide()
+				else
+					$image.hide()
+					$addImage.show()
+
+			$imageInput.focusout updateImage
+			$imageInput.keyup((e) ->
+				updateImage() if e.which is 13
+			)
+
+			$addImage.click =>
+				$addImage.hide()
+				$imageInput.show().focus()
+
+			$image.click =>
+				$image.hide()
+				$imageInput.show().focus().select()
+
+			if categoryImage
+				$image.show()
+			else
+				$addImage.show()
+
 		render: ->
 			@$el.empty()
 
@@ -148,14 +190,8 @@ $ ->
 			$header.attr("src", @attributes.header)
 			@$el.append $header
 
-			image = @model.get "image"
-			if image
-				$image = $("<img>").attr("src", image)
-				@$el.append $image
-
-			$addImage = $("<img>").attr("src", '/static/img/picture32.png')
-			@$el.append $addImage
-
+			@renderImage()
+			
 			$el = @$el
 			@model.get("entries").each (entry) ->
 				entryView = new EntryView(
