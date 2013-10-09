@@ -1,4 +1,9 @@
 $ ->
+	CATEGORIES = [{
+		name: "Topsauce"
+		header: "http://farm3.static.flickr.com/2777/4068256421_cf820647b2_o.jpg"
+	}]
+
 	# shout out to http://www.shesek.info/web-development/recursive-backbone-models-tojson
 	Backbone.Model.prototype.toJSON = ->
 		if (@_isSerializing)
@@ -29,12 +34,16 @@ $ ->
 	Recaps = Backbone.Model.extend(
 		constructor: ->
 			Backbone.Model.apply this, arguments
-			topsauce = new Category header: 'http://farm3.static.flickr.com/2777/4068256421_cf820647b2_o.jpg'
-			topsauce.get("entries").add new Entry(
+			
+			for category in CATEGORIES
+				categoryModel = new Category
+				@set category.name, categoryModel
+
+			@get("Topsauce").get("entries").add new Entry(
 				subcategory: "*"
 				description: "Some topsauce"
 			)
-			@set "topsauce", topsauce
+
 			@set "isms", ""
 			@set "closingisms", ""
 	)
@@ -92,12 +101,13 @@ $ ->
 				recaps.set "isms", $(this).val()
 			)
 
-			topsauceView = new CategoryView(
-				attributes:
-					header: "http://farm3.static.flickr.com/2777/4068256421_cf820647b2_o.jpg",
-				model: recaps.get("topsauce")
-			)
-			$el.append topsauceView.render().$el
+			for category in CATEGORIES
+				categoryView = new CategoryView(
+					model: recaps.get category.name
+					attributes:
+						header: category.header
+				)
+				$el.append categoryView.render().$el
 
 			$el.append $("<textarea>").change( ->
 				recaps.set "closingisms", $(this).val()
