@@ -1,4 +1,17 @@
 $ ->
+	# shout out to http://www.shesek.info/web-development/recursive-backbone-models-tojson
+	Backbone.Model.prototype.toJSON = ->
+		if (@_isSerializing)
+			return this.id || this.cid
+		@_isSerializing = true
+		json = _.clone @attributes
+		_.each(json, (value, name) ->
+			if _.isFunction(value.toJSON)
+				(json[name] = value.toJSON())
+		)
+		@_isSerializing = false
+		return json
+
 	Recapper = Backbone.Model.extend()
 
 	Entry = Backbone.Model.extend()
@@ -21,7 +34,8 @@ $ ->
 				subcategory: "*"
 				description: "Some topsauce"
 			)
-			@set("topsauce", topsauce)
+			@set "topsauce", topsauce
+			@set "isms", ""
 	)
 
 	EntryView = Backbone.View.extend(
@@ -94,6 +108,15 @@ $ ->
 			model: recaps
 		)
 	view.render()
+
+	$dumpModel = $("<button>").click( ->
+		console.log JSON.stringify(recaps.toJSON())
+	).css({
+		position: "fixed"
+		top: "0px"
+		right: "0px"
+	}).text("model")
+	$("body").append $dumpModel
 
 	#$('button', $loginWidget).click ->
 	#	$loginWidget.remove()
