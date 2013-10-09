@@ -9,6 +9,7 @@
 		<script type="text/javascript" src="/static/js/main.js"></script>
 	</head>
 	<body>
+		<!-- JSON populated with the recapper data -->
 		<script type="text/javascript">
 			recappers = {
 				{% for recapper in recappers %}
@@ -18,8 +19,12 @@
 				{% endfor %}
 			};
 		</script>
+
+		<!-- Our actual recaps -->
 		<div id="recaps">
 		</div>
+
+		<!-- The login widget -->
 		<div id="login-widget">
 			<div class="blocker">
 			</div>
