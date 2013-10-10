@@ -20,6 +20,13 @@ $ ->
 	view.render()
 	$('body').append view.$el
 
+	updateSaves = (updatedSaves) ->
+		for save in updatedSaves
+			if save.manual is "manua"
+				saves.set "manual", save
+			else
+				saves.set "auto", save
+
 	$('body').append $('<button>').click( ->
 		data =
 			recapper: recapper.name
@@ -31,12 +38,8 @@ $ ->
 			url: "/save"
 			data: data
 			success: (response) ->
-				response = $.parseJSON(response)
-				for save in response
-					if save.manual is "manua"
-						saves.set "manual", save
-					else
-						saves.set "auto", save
+				updateSaves $.parseJSON(response)
+				
 			error: (e) ->
 				alert "Something broke while saving!\nTell Beyamor you got a #{e.status}"
 		)
