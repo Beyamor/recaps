@@ -1,9 +1,7 @@
 $ ->
 	$loginWidget = $('#login-widget')
 	$loginWidget.remove()
-	recapper = null
-	for id of recappers
-		recapper = recappers[id] if recappers[id].name is "Beyamor"
+	recapper = (recapper for recapper in recappers when recapper.name is "Beyamor")[0]
 
 	recaps = new caps.Recaps(
 		recapper: recapper
@@ -17,8 +15,8 @@ $ ->
 	$('body').append $('<button>').click( ->
 		data =
 			recapper: recapper.name
-			recaps: JSON.stringify(recaps.toJSON())
-			type: 'manual'
+			content: JSON.stringify(recaps.toJSON())
+			manual: true
 
 		$.ajax(
 			type: "POST"

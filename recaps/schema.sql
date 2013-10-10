@@ -5,14 +5,22 @@ create table posted_entries (
 	category text not null,
 	subcategory text,
 	description text not null,
-	url text not null
+	url text not null,
+	foreign key(recapper) references recappers(name)
 );
 
 drop table if exists recappers;
 create table recappers (
-	id integer primary key autoincrement,
-	name text not null,
+	name text primary key,
 	header text not null
+);
+
+drop table if exists recaps;
+create table recaps (
+	recapper text not null,
+	content text not null,
+	manual boolean not null,
+	foreign key(recapper) references recappers(name)
 );
 
 insert into recappers ("name", "header") values

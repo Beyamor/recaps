@@ -14,14 +14,14 @@
 	<body>
 		<!-- JSON populated with the recapper data -->
 		<script type="text/javascript">
-			recappers = {
+			recappers = [
 				{% for recapper in recappers %}
-					{{ recapper['id'] }}: {
-						header: "{{ recapper['header'] }}",
-						name: "{{ recapper['name'] }}"
-					}
+				{
+					name: "{{ recapper['name'] }}",
+					header: "{{ recapper['header'] }}"
+				},
 				{% endfor %}
-			};
+			];
 		</script>
 
 		<!-- Our actual recaps -->

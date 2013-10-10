@@ -2,6 +2,7 @@ import json
 import sqlite3
 from flask import Flask, Response, request, g, render_template
 from contextlib import closing
+from datetime import datetime
 
 # default configuration junk
 DATABASE	= "recaps.db"
@@ -65,15 +66,21 @@ def get_main():
 	recappers = []
 	for row in cur.fetchall():
 		recappers.append({
-			"id": row[0],
-			"name": row[1],
-			"header": row[2]
+			"name": row[0],
+			"header": row[1]
 			})
 	return render_template("main.html", recappers=recappers)
 
 @app.route("/save", methods=["POST"])
 def save_recaps():
-	return request.form['recapper']
+	data = request.form
+	g.db.execute('insert into recaps (recapper, content, manual) values (?, ?, ?)', [
+			data['recapper'],
+			data['content'],
+			data['manual']
+		])
+	g.db.commit()
+	return str(datetime.utcnow())
 
 if __name__ == "__main__":
 	app.run(debug=True)
