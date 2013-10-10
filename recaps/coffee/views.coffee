@@ -32,11 +32,13 @@ $ ->
 
 	EditingEntryView = Backbone.View.extend(
 		events:
-			"click .confirm": "finishEditing"
+			'click .confirm': 'finishEditing'
+			'click .remove': 'remove'
 
 		initialize: ->
-			@category = @attributes.category
-			@views = @attributes.views
+			@category	= @attributes.category
+			@views		= @attributes.views
+			@entries	= @attributes.entries
 			@renderOnModelChange()
 			@render()
 
@@ -48,6 +50,10 @@ $ ->
 
 			@$el.hide()
 			@views.complete.$el.show()
+			_(this).bindAll 'remove'
+
+		remove: ->
+			@entries.remove @model
 
 		template: _.template(
 			'<div class="editing-entry">' +
@@ -65,6 +71,7 @@ $ ->
 				'<% } %>' +
 				'</select>' +
 				'<button class="confirm">OK</button>' +
+				'<button class="remove">Remove</button>' +
 			'</div>'
 		)
 
@@ -91,6 +98,7 @@ $ ->
 				attributes:
 					views: @views
 					category: @attributes.category
+					entries: @attributes.entries
 			)
 
 			@views.complete.$el.hide()
@@ -154,13 +162,6 @@ $ ->
 			entry = new caps.Entry
 			@model.get("entries").add entry
 
-			view = new EntryView(
-				model: entry
-				attributes:
-					category: @attributes.category
-			)
-			@$el.before(view.render().$el)
-
 		render: ->
 			@$el.html("+")
 			return this
@@ -172,15 +173,38 @@ $ ->
 		initialize: ->
 			@category = @attributes.category
 
+			@entryViews = []
+
 			@imageView = new CategoryImageView(
 				model: @model
 			)
 
 			@addView = new AddEntryView(
 				model: @model
+			)
+
+			_(this).bindAll 'addEntry', 'removeEntry'
+			@model.get('entries').bind 'add', @addEntry
+			@model.get('entries').bind 'remove', @removeEntry
+
+		addEntry: (entry) ->
+			entryView = new EntryView(
+				model: entry
 				attributes:
 					category: @category
+					entries: @model.get('entries')
 			)
+
+			@entryViews.push entryView
+
+			entryView.render()
+			@addView.$el.before entryView.$el
+
+		removeEntry: (entry) ->
+			viewToRemove = _(@entryViews).select((v) -> v.model == entry)[0]
+			@entryViews = _(@entryViews).without viewToRemove
+
+			viewToRemove.$el.remove()
 
 		render: ->
 			@$el.empty()
@@ -192,13 +216,9 @@ $ ->
 			@imageView.render()
 			@$el.append(@imageView.$el)
 
-			$el = @$el
-			@model.get("entries").each (entry) ->
-				entryView = new EntryView(
-					model: entry
-				)
-
-				$el.append(entryView.render().$el)
+			for entryView in @entryViews
+				entryView.render()
+				$el.append entryView.$el
 
 			@addView.render()
 			@$el.append(@addView.$el)
