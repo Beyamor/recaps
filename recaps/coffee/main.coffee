@@ -14,14 +14,34 @@ $ ->
 		)
 	view.render()
 
-	$dumpModel = $("<button>").click( ->
+	$('body').append $('<button>').click( ->
+		data =
+			recapper: recapper
+			recaps: recaps.toJSON()
+			type: 'manual'
+
+		$.ajax(
+			type: "POST"
+			url: "/save"
+			data: data
+			success: ->
+				console.log 'did eet'
+			error: (e) ->
+				alert "Something broke while saving!\nTell Beyamor you got a #{e.status}"
+		)
+	).css({
+		position: 'fixed'
+		top: '0px'
+		right: '0px'
+	}).text('save')
+
+	$('body').append $("<button>").click( ->
 		console.log JSON.stringify(recaps.toJSON())
 	).css({
 		position: "fixed"
-		top: "0px"
+		top: "25px"
 		right: "0px"
 	}).text("model")
-	$("body").append $dumpModel
 
 	#$('button', $loginWidget).click ->
 	#	$loginWidget.remove()
