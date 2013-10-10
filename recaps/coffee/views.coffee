@@ -1,18 +1,20 @@
 $ ->
 	CATEGORIES = caps.CATEGORIES
 
+	Backbone.View.prototype.renderOnModelChange = ->
+		@model.on "change", @render, this
+
 	CompleteEntryView = Backbone.View.extend(
 		events:
 			"click": "startEditing"
 
 		initialize: ->
 			@views = @attributes.views
-			@model.on "change", @render, this
+			@renderOnModelChange()
 			@render()
 
 		startEditing: ->
 			@$el.hide()
-
 			@views.editing.$el.show()
 
 		template: _.template(
@@ -34,7 +36,7 @@ $ ->
 
 		initialize: ->
 			@views = @attributes.views
-			@model.on "change", @render, this
+			@renderOnModelChange()
 			@render()
 
 		finishEditing: ->
