@@ -2,3 +2,8 @@ recaps.db
 .sass-cache
 static/css/main.css
 static/js/main.js
+static/js/data.js
+static/js/definitions.js
+static/js/models.js
+static/js/views.js
+
