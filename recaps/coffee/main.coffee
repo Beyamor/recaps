@@ -92,7 +92,11 @@ $ ->
 
 	Recapper = Backbone.Model.extend()
 
-	Entry = Backbone.Model.extend()
+	Entry = Backbone.Model.extend(
+		defaults:
+			link: ""
+			description: ""
+	)
 
 	Entries = Backbone.Collection.extend(
 		model: Entry
@@ -121,7 +125,19 @@ $ ->
 			@set "closingisms", ""
 	)
 
-	EntryView = Backbone.View.extend(
+	CompleteEntryView = Backbone.View.extend(
+		events:
+			"click": "startEditing"
+
+		initialize: ->
+			@views = @attributes.views
+			@model.on "change", @render, this
+			@render()
+
+		startEditing: ->
+			@views.editing.$el.show()
+			@$el.hide()
+
 		template: _.template(
 			'<div class="entry">' +
 				'<strong>' +
@@ -132,7 +148,63 @@ $ ->
 		)
 
 		render: ->
-			@$el.html(@template(@model.attributes))
+			@$el.html(@template @model.attributes)
+	)
+
+	EditingEntryView = Backbone.View.extend(
+		events:
+			"focusout": "finishEditing"
+			"click .confirm": "finishEditing"
+
+		initialize: ->
+			@views = @attributes.views
+			@model.on "change", @render, this
+			@render()
+
+		finishEditing: ->
+			@$el.hide()
+			@views.complete.$el.show()
+
+			@model.set "description", $(".description input", @$el).val()
+			@model.set "link", $(".link input", @$el).val()
+
+		template: _.template(
+			'<div class="editing-entry">' +
+				'<div class="description">' +
+					'Description: <input type="text" value="<%= description %>"/>' +
+				'</div>' +
+				'<div class="link">' +
+					'Link: <input type="text" value="<%= link %>"/>' +
+				'</div>' +
+				'<button class="confirm">OK</button>' +
+			'</div>'
+		)
+
+		render: ->
+			@$el.html(@template @model.attributes)
+	)
+
+	EntryView = Backbone.View.extend(
+		initialize: ->
+			@views = {}
+
+			@views.complete = new CompleteEntryView(
+				model: @model
+				attributes:
+					views: @views
+			)
+
+			@views.editing = new EditingEntryView(
+				model: @model
+				attributes:
+					views: @views
+			)
+
+			@$el.append(@views.complete.$el).append(@views.editing.$el)
+
+		render: ->
+			@views.editing.render()
+			@views.complete.render()
 			return this
 	)
 
