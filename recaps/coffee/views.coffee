@@ -154,6 +154,8 @@ $ ->
 		className: "category"
 
 		initialize: ->
+			@category = @attributes.category
+
 			@imageView = new CategoryImageView(
 				model: @model
 			)
@@ -166,7 +168,7 @@ $ ->
 			@$el.empty()
 
 			$header = $("<img>")
-			$header.attr("src", @attributes.header)
+			$header.attr("src", @category.header)
 			@$el.append $header
 
 			@imageView.render()
@@ -207,8 +209,7 @@ $ ->
 				categoryView = new CategoryView(
 					model: recaps.get category.name
 					attributes:
-						category: category.name
-						header: category.header
+						category: category
 				)
 				$el.append categoryView.render().$el
 
