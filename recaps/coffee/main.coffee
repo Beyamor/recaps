@@ -4,13 +4,6 @@ $ ->
 	recapper = (recapper for recapper in recappers when recapper.name is "Beyamor")[0]
 
 	
-	saves = new caps.Saves
-	savesView = new caps.SavesView(
-		model: saves
-		recapper: recapper.name
-	)
-	$('body').append savesView.$el
-
 	recaps = new caps.Recaps(
 		recapper: recapper
 	)
@@ -20,6 +13,15 @@ $ ->
 		)
 	view.render()
 	$('body').append view.$el
+
+	saves = new caps.Saves
+	savesView = new caps.SavesView(
+		model: saves
+		attributes:
+			recaps: recaps
+	)
+	$('body').append savesView.$el
+
 
 	updateSaves = (updatedSaves) ->
 		for save in updatedSaves

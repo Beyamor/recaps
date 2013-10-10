@@ -181,6 +181,7 @@ $ ->
 			@category = @attributes.category
 
 			@entryViews = []
+			@model.get("entries").each (entry) => @addEntryView(entry)
 
 			@imageView = new CategoryImageView(
 				model: @model
@@ -194,7 +195,7 @@ $ ->
 			@model.get('entries').bind 'add', @addEntry
 			@model.get('entries').bind 'remove', @removeEntry
 
-		addEntry: (entry) ->
+		addEntryView: (entry) ->
 			entryView = new EntryView(
 				model: entry
 				attributes:
@@ -202,7 +203,10 @@ $ ->
 					entries: @model.get('entries')
 			)
 			@entryViews.push entryView
+			return entryView
 
+		addEntry: (entry) ->
+			entryView = addEntryView(entry)
 			@addView.$el.before entryView.$el
 
 			# gotta call this after adding the view
@@ -227,7 +231,7 @@ $ ->
 
 			for entryView in @entryViews
 				entryView.render()
-				$el.append entryView.$el
+				@$el.append entryView.$el
 
 			@addView.render()
 			@$el.append(@addView.$el)
@@ -239,8 +243,12 @@ $ ->
 	RecapsView = Backbone.View.extend(
 		el: $('#recaps')
 
+		initialize: ->
+			@renderOnModelChange()
+
 		render: ->
 			$el = @$el
+			$el.empty()
 			recaps = @model
 
 			$el.empty()
@@ -278,6 +286,7 @@ $ ->
 		id: 'saves'
 
 		initialize: ->
+			@recaps = @attributes.recaps
 			@renderOnModelChange()
 			@$el.css(
 				position: 'fixed'
@@ -290,9 +299,9 @@ $ ->
 				url: '/save'
 				data:
 					id: which
-				success: (response) ->
-					console.log response
-				error: (e) ->
+				success: (response) =>
+					@recaps.update $.parseJSON response
+				error: (e) =>
 					alert "Something broke while loading a save!\nTell Beyamor you got a #{e.status}"
 
 		onManualClick: ->

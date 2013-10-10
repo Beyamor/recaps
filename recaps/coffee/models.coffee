@@ -29,21 +29,31 @@ $ ->
 	)
 
 	Category = Backbone.Model.extend(
-		constructor: ->
-			Backbone.Model.apply this, arguments
+		initialize: ->
 			@set("entries", new Entries)
+
+		update: (attributes) ->
+			for entry in attributes.entries
+				@get("entries").add new Entry entry
 	)
 
 	Recaps = Backbone.Model.extend(
-		constructor: ->
-			Backbone.Model.apply this, arguments
-
+		initialize: ->
 			for category in CATEGORIES
 				categoryModel = new Category
 				@set category.name, categoryModel
 
 			@set "isms", ""
 			@set "closingisms", ""
+
+		update: (attributes) ->
+			for category in CATEGORIES
+				categoryAttributes = attributes[category.name]
+				categoryModel = new Category
+				categoryModel.update categoryAttributes
+				attributes[category.name] = categoryModel
+
+			@set attributes
 	)
 	caps.Recaps = Recaps
 
