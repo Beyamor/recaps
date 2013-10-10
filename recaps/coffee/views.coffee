@@ -35,6 +35,7 @@ $ ->
 			"click .confirm": "finishEditing"
 
 		initialize: ->
+			@category = @attributes.category
 			@views = @attributes.views
 			@renderOnModelChange()
 			@render()
@@ -43,6 +44,7 @@ $ ->
 			@model.set
 				description: $(".description input", @$el).val()
 				link: $(".link input", @$el).val()
+				subcategory: $(".subcategory", @$el).val()
 
 			@$el.hide()
 			@views.complete.$el.show()
@@ -55,12 +57,23 @@ $ ->
 				'<div class="link">' +
 					'Link: <input type="text" value="<%= link %>"/>' +
 				'</div>' +
+				'<select class="subcategory">' +
+				'<% for (var subcategory in subcategories) { %>' +
+					'<option value="<%= subcategories[subcategory][0] %>">' +
+						'<%= subcategories[subcategory][1] %>' +
+					'</option>' +
+				'<% } %>' +
+				'</select>' +
 				'<button class="confirm">OK</button>' +
 			'</div>'
 		)
 
 		render: ->
-			@$el.html(@template @model.attributes)
+			attributesWithSubcategories = _.extend(
+				subcategories: @category.subcategories,
+				@model.attributes
+			)
+			@$el.html(@template attributesWithSubcategories)
 	)
 
 	EntryView = Backbone.View.extend(
@@ -77,6 +90,7 @@ $ ->
 				model: @model
 				attributes:
 					views: @views
+					category: @attributes.category
 			)
 
 			@views.complete.$el.hide()
@@ -142,6 +156,8 @@ $ ->
 
 			view = new EntryView(
 				model: entry
+				attributes:
+					category: @attributes.category
 			)
 			@$el.before(view.render().$el)
 
@@ -162,6 +178,8 @@ $ ->
 
 			@addView = new AddEntryView(
 				model: @model
+				attributes:
+					category: @category
 			)
 
 		render: ->
