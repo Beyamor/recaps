@@ -13,9 +13,15 @@ $ ->
 			@renderOnModelChange()
 			@render()
 
-		startEditing: ->
+		show: ->
+			@$el.show()
+
+		hide: ->
 			@$el.hide()
-			@views.editing.$el.show()
+
+		startEditing: ->
+			@hide()
+			@views.editing.show()
 
 		template: _.template(
 			'<div class="entry">' +
@@ -42,15 +48,24 @@ $ ->
 			@renderOnModelChange()
 			@render()
 
+			_(this).bindAll 'remove'
+
+		show: ->
+			@$el.show()
+			$('.description input', @$el).focus()
+
+		hide: ->
+			@$el.hide()
+
 		finishEditing: ->
 			@model.set
 				description: $(".description input", @$el).val()
 				link: $(".link input", @$el).val()
 				subcategory: $(".subcategory", @$el).val()
 
-			@$el.hide()
-			@views.complete.$el.show()
-			_(this).bindAll 'remove'
+
+			@hide()
+			@views.complete.show()
 
 		remove: ->
 			@entries.remove @model
@@ -92,6 +107,7 @@ $ ->
 				attributes:
 					views: @views
 			)
+			@views.complete.render()
 
 			@views.editing = new EditingEntryView(
 				model: @model
@@ -100,11 +116,15 @@ $ ->
 					category: @attributes.category
 					entries: @attributes.entries
 			)
-
-			@views.complete.$el.hide()
 			@views.editing.render()
 
+			@views.complete.hide()
+			@views.complete.show()
+
 			@$el.append(@views.complete.$el).append(@views.editing.$el)
+
+		startEditing: ->
+			@views.complete.startEditing()
 
 		render: ->
 			@views.editing.render()
@@ -194,11 +214,13 @@ $ ->
 					category: @category
 					entries: @model.get('entries')
 			)
-
 			@entryViews.push entryView
 
-			entryView.render()
 			@addView.$el.before entryView.$el
+
+			# gotta call this after adding the view
+			# so the field can get focus
+			entryView.startEditing()
 
 		removeEntry: (entry) ->
 			viewToRemove = _(@entryViews).select((v) -> v.model == entry)[0]
