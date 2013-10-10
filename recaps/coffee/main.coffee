@@ -16,16 +16,16 @@ $ ->
 
 	$('body').append $('<button>').click( ->
 		data =
-			recapper: recapper
-			recaps: recaps.toJSON()
+			recapper: recapper.name
+			recaps: JSON.stringify(recaps.toJSON())
 			type: 'manual'
 
 		$.ajax(
 			type: "POST"
 			url: "/save"
 			data: data
-			success: ->
-				console.log 'did eet'
+			success: (response) ->
+				console.log response
 			error: (e) ->
 				alert "Something broke while saving!\nTell Beyamor you got a #{e.status}"
 		)

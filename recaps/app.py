@@ -71,5 +71,9 @@ def get_main():
 			})
 	return render_template("main.html", recappers=recappers)
 
+@app.route("/save", methods=["POST"])
+def save_recaps():
+	return request.form['recapper']
+
 if __name__ == "__main__":
 	app.run(debug=True)
