@@ -5,11 +5,11 @@ $ ->
 	for id of recappers
 		recapper = recappers[id] if recappers[id].name is "Beyamor"
 
-	recaps = new Recaps(
+	recaps = new caps.Recaps(
 		recapper: recapper
 	)
 
-	view = new RecapsView(
+	view = new caps.RecapsView(
 			model: recaps
 		)
 	view.render()

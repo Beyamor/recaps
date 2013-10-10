@@ -1,4 +1,5 @@
-window.CATEGORIES = [{
+window.caps or= {}
+window.caps.CATEGORIES = [{
 	name: "Topsauce"
 	header: "http://farm3.static.flickr.com/2777/4068256421_cf820647b2_o.jpg"
 	subcategories: [

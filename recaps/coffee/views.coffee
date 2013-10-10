@@ -1,4 +1,6 @@
 $ ->
+	CATEGORIES = caps.CATEGORIES
+
 	CompleteEntryView = Backbone.View.extend(
 		events:
 			"click": "startEditing"
@@ -154,7 +156,7 @@ $ ->
 
 	)
 
-	window.RecapsView = Backbone.View.extend(
+	RecapsView = Backbone.View.extend(
 		el: $('#recaps')
 
 		render: ->
@@ -186,3 +188,6 @@ $ ->
 
 			return this
 	)
+	
+	window.caps or= {}
+	window.caps.RecapsView = RecapsView

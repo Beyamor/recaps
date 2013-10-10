@@ -1,4 +1,6 @@
 $ ->
+	CATEGORIES = caps.CATEGORIES
+
 	# shout out to http://www.shesek.info/web-development/recursive-backbone-models-tojson
 	Backbone.Model.prototype.toJSON = ->
 		if (@_isSerializing)
@@ -30,7 +32,7 @@ $ ->
 			@set("entries", new Entries)
 	)
 
-	window.Recaps = Backbone.Model.extend(
+	Recaps = Backbone.Model.extend(
 		constructor: ->
 			Backbone.Model.apply this, arguments
 
@@ -41,3 +43,6 @@ $ ->
 			@set "isms", ""
 			@set "closingisms", ""
 	)
+
+	window.caps or= {}
+	window.caps.Recaps = Recaps
