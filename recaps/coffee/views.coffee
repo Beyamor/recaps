@@ -271,6 +271,10 @@ $ ->
 	window.caps.RecapsView = RecapsView
 
 	SavesView = Backbone.View.extend(
+		events:
+			'click .manual': 'onManualClick'
+			'click .auto': 'onAutoClick'
+
 		id: 'saves'
 
 		initialize: ->
@@ -280,6 +284,22 @@ $ ->
 				top: '0px'
 				left: '0px'
 			)
+
+		loadSave: (which) ->
+			$.ajax
+				url: '/save'
+				data:
+					id: which
+				success: (response) ->
+					console.log response
+				error: (e) ->
+					alert "Something broke while loading a save!\nTell Beyamor you got a #{e.status}"
+
+		onManualClick: ->
+			@loadSave(@model.get('manual').id)
+
+		onAutoClick: ->
+			@loadSave(@model.get('auto').id)
 
 		template: pageTemplate('saves')
 

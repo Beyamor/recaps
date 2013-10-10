@@ -105,5 +105,15 @@ def save_recaps():
 
 	return recapper_save_data(data['recapper'])
 
+@app.route('/save', methods=['GET'])
+def get_save():
+	cur = g.db.execute('select content from recaps where id=?', [
+		request.args['id']
+	])
+
+	# Yo, remember, that should already be perfectly good JSON
+	return cur.fetchone()[0]
+
+
 if __name__ == "__main__":
 	app.run(debug=True)

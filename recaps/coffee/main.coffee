@@ -7,6 +7,7 @@ $ ->
 	saves = new caps.Saves
 	savesView = new caps.SavesView(
 		model: saves
+		recapper: recapper.name
 	)
 	$('body').append savesView.$el
 
