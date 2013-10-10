@@ -116,7 +116,7 @@ $ ->
 
 		finishEditing: ->
 			image = @editing.val()
-			@model.image = image
+			@model.set "image", image
 
 			@editing.hide()
 			if image and image.length isnt 0
