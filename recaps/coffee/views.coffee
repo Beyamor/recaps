@@ -1,6 +1,8 @@
 $ ->
 	CATEGORIES = caps.CATEGORIES
 
+	pageTemplate = (name) -> _.template($("##{name}-template").html())
+
 	Backbone.View.prototype.renderOnModelChange = ->
 		@model.on "change", @render, this
 
@@ -304,24 +306,7 @@ $ ->
 				left: '0px'
 			)
 
-		template: _.template(
-			'<% if (manual) { %>' +
-				'<span class="save-type manual">' +
-					'Load last manual save' +
-				'</span>' +
-				'<span class="timestamp"> ' +
-					'(<%= manual.time %>)' +
-				'</span>' +
-			'<% } %>' +
-			'<% if (auto) { %>' +
-				'<span class="save-type auto">' +
-					'Load last autosave' +
-				'</span>' +
-				'<span class="timestamp"> ' +
-					'(<%= auto.time %>)' +
-				'</span>' +
-			'<% } %>'
-		)
+		template: pageTemplate('saves')
 
 		render: ->
 			@$el.html(@template @model.attributes)

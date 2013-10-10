@@ -1,0 +1,24 @@
+{% macro backbone_template(name) -%}
+	<script id="{{name}}-template" type="text/template">
+		{{ caller() }}
+	</script>
+{%- endmacro %}
+
+{% call backbone_template('saves') %}
+<% if (manual) { %>
+	<span class="save-type manual">
+		Load last manual save
+	</span>
+	<span class="timestamp">
+		(<%= manual.time %>)
+	</span>
+<% } %>
+<% if (auto) { %>
+	<span class="save-type auto">
+		Load last autosave
+	</span>
+	<span class="timestamp">
+		(<%= auto.time %>)
+	</span>
+<% } %>
+{% endcall %}
