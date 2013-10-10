@@ -20,7 +20,9 @@ $ ->
 		defaults:
 			link: ""
 			description: ""
+			subcategory: "*"
 	)
+	caps.Entry = Entry
 
 	Entries = Backbone.Collection.extend(
 		model: Entry
@@ -44,5 +46,4 @@ $ ->
 			@set "closingisms", ""
 	)
 
-	window.caps or= {}
 	window.caps.Recaps = Recaps

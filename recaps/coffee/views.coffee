@@ -126,11 +126,33 @@ $ ->
 			return this
 	)
 
+	AddEntryView = Backbone.View.extend(
+		events:
+			"click": "onClick"
+
+		onClick: ->
+			entry = new caps.Entry
+			@model.get("entries").add entry
+
+			view = new EntryView(
+				model: entry
+			)
+			@$el.before(view.render().$el)
+
+		render: ->
+			@$el.html("+")
+			return this
+	)
+
 	CategoryView = Backbone.View.extend(
 		className: "category"
 
 		initialize: ->
 			@imageView = new CategoryImageView(
+				model: @model
+			)
+
+			@addView = new AddEntryView(
 				model: @model
 			)
 
@@ -151,6 +173,9 @@ $ ->
 				)
 
 				$el.append(entryView.render().$el)
+
+			@addView.render()
+			@$el.append(@addView.$el)
 
 			return this
 
@@ -189,5 +214,4 @@ $ ->
 			return this
 	)
 	
-	window.caps or= {}
 	window.caps.RecapsView = RecapsView
