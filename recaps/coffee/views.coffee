@@ -82,50 +82,55 @@ $ ->
 			return this
 	)
 
+	CategoryImageView = Backbone.View.extend(
+		events:
+			"focusout .editing": "finishEditing"
+			"keyup .editing": "onEditingKeyUp"
+			"click .edit": "startEditing"
+			"click .complete": "startEditing"
+
+		initialize: ->
+			@edit = $('<img>').addClass('edit').attr('src', '/static/img/picture32.png').hide()
+			@editing = $('<input type="text">').addClass('editing').hide()
+			@complete = $('<img>').addClass('complete').hide()
+
+			@$el.append(@edit).append(@editing).append(@complete)
+
+			if @model.image
+				@complete.attr("src", @model.image).show()
+			else
+				@edit.show()
+
+		startEditing: ->
+			@edit.hide()
+			@complete.hide()
+			@editing.val(@model.image).show().focus().select()
+
+		finishEditing: ->
+			image = @editing.val()
+			@model.image = image
+
+			@editing.hide()
+			if image and image.length isnt 0
+				@complete.attr("src", image)
+				@complete.show()
+			else
+				@edit.show()
+
+		onEditingKeyUp: (e) ->
+			@finishEditing() if e.which is 13
+
+		render: ->
+			return this
+	)
+
 	CategoryView = Backbone.View.extend(
 		className: "category"
 
-		renderImage: ->
-			$imageContainer = $('<div>')
-			@$el.append $imageContainer
-
-			categoryImage = @model.get "image"
-
-			$image = $("<img>").attr("src", categoryImage).hide()
-			$addImage = $("<img>").attr("src", '/static/img/picture32.png').hide()
-			$imageInput = $('<input type="text">').val(categoryImage).hide()
-			$imageContainer.append($image).append($addImage).append($imageInput)
-
-			updateImage = =>
-				$imageInput.hide()
-
-				image = $imageInput.val()
-				@model.set "image", image
-
-				if image and image.length isnt 0
-					$image.attr("src", image).show()
-					$addImage.hide()
-				else
-					$image.hide()
-					$addImage.show()
-
-			$imageInput.focusout updateImage
-			$imageInput.keyup((e) ->
-				updateImage() if e.which is 13
+		initialize: ->
+			@imageView = new CategoryImageView(
+				model: @model
 			)
-
-			$addImage.click =>
-				$addImage.hide()
-				$imageInput.show().focus()
-
-			$image.click =>
-				$image.hide()
-				$imageInput.show().focus().select()
-
-			if categoryImage
-				$image.show()
-			else
-				$addImage.show()
 
 		render: ->
 			@$el.empty()
@@ -134,8 +139,9 @@ $ ->
 			$header.attr("src", @attributes.header)
 			@$el.append $header
 
-			@renderImage()
-			
+			@imageView.render()
+			@$el.append(@imageView.$el)
+
 			$el = @$el
 			@model.get("entries").each (entry) ->
 				entryView = new EntryView(
@@ -168,6 +174,7 @@ $ ->
 				categoryView = new CategoryView(
 					model: recaps.get category.name
 					attributes:
+						category: category.name
 						header: category.header
 				)
 				$el.append categoryView.render().$el

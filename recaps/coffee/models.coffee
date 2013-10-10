@@ -38,11 +38,6 @@ $ ->
 				categoryModel = new Category
 				@set category.name, categoryModel
 
-			@get("Topsauce").get("entries").add new Entry(
-				subcategory: "*"
-				description: "Some topsauce"
-			)
-
 			@set "isms", ""
 			@set "closingisms", ""
 	)
