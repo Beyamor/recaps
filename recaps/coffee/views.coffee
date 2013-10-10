@@ -57,18 +57,28 @@ $ ->
 		hide: ->
 			@$el.hide()
 
+		description: ->
+			$(".description input", @$el).val()
+
+		link: ->
+			$(".link input", @$el).val()
+
+		subcategory: ->
+			$(".subcategory", @$el).val()
+
 		finishEditing: ->
 			@model.set
-				description: $(".description input", @$el).val()
-				link: $(".link input", @$el).val()
-				subcategory: $(".subcategory", @$el).val()
-
+				description: @description()
+				link: @link()
+				subcategory: @subcategory()
 
 			@hide()
 			@views.complete.show()
 
 		remove: ->
-			@entries.remove @model
+			noInput = (@description().length is 0 and @link().length is 0)
+			if noInput or confirm('Remove entry?')
+				@entries.remove @model
 
 		template: _.template(
 			'<div class="editing-entry">' +
