@@ -25,14 +25,7 @@ $ ->
 			@hide()
 			@views.editing.show()
 
-		template: _.template(
-			'<div class="entry">' +
-				'<strong>' +
-					'<%= subcategory %> - ' +
-				'</strong>' +
-				'<%= description %>' +
-			'</div>'
-		)
+		template: pageTemplate('completed-entry')
 
 		render: ->
 			@$el.html(@template @model.attributes)
@@ -82,25 +75,7 @@ $ ->
 			if noInput or confirm('Remove entry?')
 				@entries.remove @model
 
-		template: _.template(
-			'<div class="editing-entry">' +
-				'<div class="description">' +
-					'Description: <input type="text" value="<%= description %>"/>' +
-				'</div>' +
-				'<div class="link">' +
-					'Link: <input type="text" value="<%= link %>"/>' +
-				'</div>' +
-				'<select class="subcategory">' +
-				'<% for (var subcategory in subcategories) { %>' +
-					'<option value="<%= subcategories[subcategory][0] %>">' +
-						'<%= subcategories[subcategory][1] %>' +
-					'</option>' +
-				'<% } %>' +
-				'</select>' +
-				'<button class="confirm">OK</button>' +
-				'<button class="remove">Remove</button>' +
-			'</div>'
-		)
+		template: pageTemplate('editing-entry')
 
 		render: ->
 			attributesWithSubcategories = _.extend(

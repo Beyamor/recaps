@@ -22,3 +22,30 @@
 	</span>
 <% } %>
 {% endcall %}
+
+{% call backbone_template('completed-entry') %}
+<div class="entry">
+	<strong><%= subcategory %> - </strong>
+	<%= description %>
+</div>
+{% endcall %}
+
+{% call backbone_template('editing-entry') %}
+<div class="editing-entry">
+	<div class="description">
+		Description: <input type="text" value="<%= description %>"/>
+	</div>
+	<div class="link">
+		Link: <input type="text" value="<%= link %>"/>
+	</div>
+	<select class="subcategory">
+		<% for (var subcategory in subcategories) { %>
+			<option value="<%= subcategories[subcategory][0] %>">
+				<%= subcategories[subcategory][1] %>
+			</option>
+		<% } %>
+	</select>
+	<button class="confirm">OK</button>
+	<button class="remove">Remove</button>
+</div>
+{% endcall %}
