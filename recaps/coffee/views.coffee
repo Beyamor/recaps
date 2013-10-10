@@ -253,12 +253,12 @@ $ ->
 
 			$el.empty()
 
-			$recapperHeader = $("<img>").attr("src", recaps.get("recapper").header)
+			$recapperHeader = $('<img>').attr('src', recaps.get('recapper').header)
 			$el.append $recapperHeader
 
-			$el.append $("<textarea>").change( ->
-				recaps.set "isms", $(this).val()
-			)
+			$el.append $('<textarea>').change(->
+				recaps.set 'isms', $(this).val()
+			).val(recaps.get 'isms')
 
 			for category in CATEGORIES
 				categoryView = new CategoryView(
@@ -268,9 +268,9 @@ $ ->
 				)
 				$el.append categoryView.render().$el
 
-			$el.append $("<textarea>").change( ->
-				recaps.set "closingisms", $(this).val()
-			)
+			$el.append $('<textarea>').change(->
+				recaps.set 'closingisms', $(this).val()
+			).val(recaps.get 'closingisms')
 
 
 			return this
