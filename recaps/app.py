@@ -68,17 +68,24 @@ def get_main():
 		recappers.append({
 			"name": row[0],
 			"header": row[1]
-			})
+		})
 	return render_template("main.html", recappers=recappers)
 
 @app.route("/save", methods=["POST"])
 def save_recaps():
 	data = request.form
+
+	# Whatever. Uh. We're going to give 'em one manual and one auto save
+	g.db.execute('delete from recaps where recapper=? and manual=?', [
+		data['recapper'],
+		data['manual']
+	])
+
 	g.db.execute('insert into recaps (recapper, content, manual) values (?, ?, ?)', [
-			data['recapper'],
-			data['content'],
-			data['manual']
-		])
+		data['recapper'],
+		data['content'],
+		data['manual']
+	])
 	g.db.commit()
 
 	result = []
