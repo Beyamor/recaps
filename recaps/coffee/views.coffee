@@ -11,8 +11,9 @@ $ ->
 			@render()
 
 		startEditing: ->
-			@views.editing.$el.show()
 			@$el.hide()
+
+			@views.editing.$el.show()
 
 		template: _.template(
 			'<div class="entry">' +
@@ -29,7 +30,6 @@ $ ->
 
 	EditingEntryView = Backbone.View.extend(
 		events:
-			"focusout": "finishEditing"
 			"click .confirm": "finishEditing"
 
 		initialize: ->
@@ -38,11 +38,12 @@ $ ->
 			@render()
 
 		finishEditing: ->
+			@model.set
+				description: $(".description input", @$el).val()
+				link: $(".link input", @$el).val()
+
 			@$el.hide()
 			@views.complete.$el.show()
-
-			@model.set "description", $(".description input", @$el).val()
-			@model.set "link", $(".link input", @$el).val()
 
 		template: _.template(
 			'<div class="editing-entry">' +
@@ -75,6 +76,9 @@ $ ->
 				attributes:
 					views: @views
 			)
+
+			@views.complete.$el.hide()
+			@views.editing.render()
 
 			@$el.append(@views.complete.$el).append(@views.editing.$el)
 
