@@ -17,6 +17,8 @@ create table recappers (
 
 drop table if exists recaps;
 create table recaps (
+	id integer primary key autoincrement,
+	save_time timestamp default current_timestamp,
 	recapper text not null,
 	content text not null,
 	manual boolean not null,

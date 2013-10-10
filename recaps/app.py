@@ -80,7 +80,16 @@ def save_recaps():
 			data['manual']
 		])
 	g.db.commit()
-	return str(datetime.utcnow())
+
+	result = []
+	cur = g.db.execute('select recapper, save_time from recaps')
+	for row in cur.fetchall():
+		result.append({
+			'recapper': row[0],
+			'time': row[1]
+			})
+
+	return json.dumps(result)
 
 if __name__ == "__main__":
 	app.run(debug=True)
