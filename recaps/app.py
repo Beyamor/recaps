@@ -89,11 +89,12 @@ def save_recaps():
 	g.db.commit()
 
 	result = []
-	cur = g.db.execute('select recapper, save_time from recaps')
+	cur = g.db.execute('select id, manual, save_time from recaps')
 	for row in cur.fetchall():
 		result.append({
-			'recapper': row[0],
-			'time': row[1]
+			'id': row[0],
+			'manual': row[1],
+			'time': row[2]
 			})
 
 	return json.dumps(result)
