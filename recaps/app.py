@@ -71,7 +71,22 @@ def get_main():
 		})
 	return render_template("main.html", recappers=recappers)
 
-@app.route("/save", methods=["POST"])
+def recapper_save_data(recapper):
+	result = []
+	cur = g.db.execute('select id, manual, save_time from recaps where recapper=?', [recapper])
+	for row in cur.fetchall():
+		result.append({
+			'id': row[0],
+			'manual': row[1],
+			'time': row[2]
+			})
+	return json.dumps(result)
+
+@app.route('/saves', methods=["GET"])
+def get_saves():
+	return recapper_save_data(request.args['recapper'])
+
+@app.route("/saves", methods=["POST"])
 def save_recaps():
 	data = request.form
 
@@ -88,16 +103,7 @@ def save_recaps():
 	])
 	g.db.commit()
 
-	result = []
-	cur = g.db.execute('select id, manual, save_time from recaps')
-	for row in cur.fetchall():
-		result.append({
-			'id': row[0],
-			'manual': row[1],
-			'time': row[2]
-			})
-
-	return json.dumps(result)
+	return recapper_save_data(data['recapper'])
 
 if __name__ == "__main__":
 	app.run(debug=True)

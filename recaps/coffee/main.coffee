@@ -27,6 +27,16 @@ $ ->
 			else
 				saves.set "auto", save
 
+	$.ajax
+		type: "GET"
+		url: "/saves"
+		data:
+			recapper: recapper.name
+		success: (response) ->
+			updateSaves $.parseJSON(response)
+		error: (e) ->
+			alert "Something broke while loading saves!\nTell Beyamor you got a #{e.status}"
+
 	$('body').append $('<button>').click( ->
 		data =
 			recapper: recapper.name
@@ -35,11 +45,10 @@ $ ->
 
 		$.ajax(
 			type: "POST"
-			url: "/save"
+			url: "/saves"
 			data: data
 			success: (response) ->
 				updateSaves $.parseJSON(response)
-				
 			error: (e) ->
 				alert "Something broke while saving!\nTell Beyamor you got a #{e.status}"
 		)
