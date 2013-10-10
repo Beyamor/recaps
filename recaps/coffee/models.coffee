@@ -45,5 +45,11 @@ $ ->
 			@set "isms", ""
 			@set "closingisms", ""
 	)
+	caps.Recaps = Recaps
 
-	window.caps.Recaps = Recaps
+	Saves = Backbone.Model.extend(
+		defaults:
+			manual: null
+			default: null
+	)
+	caps.Saves = Saves

@@ -292,3 +292,38 @@ $ ->
 	)
 	
 	window.caps.RecapsView = RecapsView
+
+	SavesView = Backbone.View.extend(
+		id: 'saves'
+
+		initialize: ->
+			@renderOnModelChange()
+			@$el.css(
+				position: 'fixed'
+				top: '0px'
+				left: '0px'
+			)
+
+		template: _.template(
+			'<% if (manual) { %>' +
+				'<span class="save-type manual">' +
+					'Load last manual save' +
+				'</span>' +
+				'<span class="timestamp"> ' +
+					'(<%= manual.time %>)' +
+				'</span>' +
+			'<% } %>' +
+			'<% if (auto) { %>' +
+				'<span class="save-type auto">' +
+					'Load last autosave' +
+				'</span>' +
+				'<span class="timestamp"> ' +
+					'(<%= auto.time %>)' +
+				'</span>' +
+			'<% } %>'
+		)
+
+		render: ->
+			@$el.html(@template @model.attributes)
+	)
+	caps.SavesView = SavesView
