@@ -3,6 +3,51 @@ $ ->
 	$loginWidget.remove()
 	recapper = (recapper for recapper in recappers when recapper.name is "Beyamor")[0]
 
+	Saves = Backbone.Model.extend(
+		defaults:
+			manual: null
+			default: null
+	)
+	saves = new Saves
+
+	SavesView = Backbone.View.extend(
+		id: 'saves'
+
+		initialize: ->
+			@renderOnModelChange()
+			@$el.css(
+				position: 'fixed'
+				top: '0px'
+				left: '0px'
+			)
+
+		template: _.template(
+			'<% if (manual) { %>' +
+				'<span class="save-type manual">' +
+					'Load last manual save' +
+				'</span>' +
+				'<span class="timestamp"> ' +
+					'(<%= manual.time %>)' +
+				'</span>' +
+			'<% } %>' +
+			'<% if (auto) { %>' +
+				'<span class="save-type auto">' +
+					'Load last autosave' +
+				'</span>' +
+				'<span class="timestamp"> ' +
+					'(<%= auto.time %>)' +
+				'</span>' +
+			'<% } %>'
+		)
+
+		render: ->
+			@$el.html(@template @model.attributes)
+	)
+	savesView = new SavesView(
+		model: saves
+	)
+	$('body').append savesView.$el
+
 	recaps = new caps.Recaps(
 		recapper: recapper
 	)
@@ -11,6 +56,7 @@ $ ->
 			model: recaps
 		)
 	view.render()
+	$('body').append view.$el
 
 	$('body').append $('<button>').click( ->
 		data =
@@ -23,7 +69,12 @@ $ ->
 			url: "/save"
 			data: data
 			success: (response) ->
-				console.log response
+				response = $.parseJSON(response)
+				for save in response
+					if save.manual is "manua"
+						saves.set "manual", save
+					else
+						saves.set "auto", save
 			error: (e) ->
 				alert "Something broke while saving!\nTell Beyamor you got a #{e.status}"
 		)
