@@ -3,6 +3,7 @@ import sqlite3
 from flask import Flask, Response, request, g, render_template
 from contextlib import closing
 from datetime import datetime
+from generate import generate
 
 # default configuration junk
 DATABASE	= "recaps.db"
@@ -115,9 +116,9 @@ def get_save():
 	return cur.fetchone()[0]
 
 @app.route('/generate')
-def generate():
-	return request.args['data']
-
+def generate_recaps():
+	recaps = generate(json.loads(request.args['data']))
+	return render_template('generate.html', recaps=recaps)
 
 if __name__ == "__main__":
 	app.run(debug=True)
