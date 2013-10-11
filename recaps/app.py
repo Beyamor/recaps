@@ -114,6 +114,10 @@ def get_save():
 	# Yo, remember, that should already be perfectly good JSON
 	return cur.fetchone()[0]
 
+@app.route('/generate')
+def generate():
+	return request.args['data']
+
 
 if __name__ == "__main__":
 	app.run(debug=True)

@@ -69,6 +69,14 @@ $ ->
 		right: "0px"
 	}).text("model")
 
+	$('body').append $('<button>').click(->
+		caps.generate(recaps.toJSON())
+	).css(
+		position: 'fixed'
+		top: '50px'
+		right: '0px'
+	).text('generate')
+
 	#$('button', $loginWidget).click ->
 	#	$loginWidget.remove()
 
