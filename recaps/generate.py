@@ -13,8 +13,18 @@ CATEGORIES = {
 def image(src):
 	return "[img]%s[/img]" % src
 
+def entry(data):
+	return "[url=%(link)s][b]%(subcategory)s[/b] - %(description)s[/url]" % data
+
 def category(name, data):
-	result = image(CATEGORIES[name])
+	result = image(CATEGORIES[name]) + '\n'
+
+	if 'image' in data:
+		result += image(data['image']) + '\n'
+
+	for entryData in data['entries']:
+		result += '\n' + entry(entryData) + '\n'
+
 	return result
 
 def generate(data):
@@ -34,19 +44,12 @@ def generate(data):
 %(isms)s
 
 %(Topsauce)s
-
 %(Wordtoid)s
-
 %(Contestoid)s
-
 %(Communitoid)s
-
 %(Gametoid)s
-
 %(Culturoid)s
-
 %(Otheroid)s
-
 %(Failtoid)s
 
 %(closingisms)s
