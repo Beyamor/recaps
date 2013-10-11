@@ -33,6 +33,7 @@ $ ->
 			@set("entries", new Entries)
 
 		update: (attributes) ->
+			@set("image", attributes.image) if attributes.image
 			for entry in attributes.entries
 				@get("entries").add new Entry entry
 	)

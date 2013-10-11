@@ -139,8 +139,8 @@ $ ->
 
 			@$el.append(@edit).append(@editing).append(@complete)
 
-			if @model.image
-				@complete.attr("src", @model.image).show()
+			if @model.get('image')
+				@complete.attr("src", @model.get('image')).show()
 			else
 				@edit.show()
 
