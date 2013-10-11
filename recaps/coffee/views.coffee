@@ -169,14 +169,14 @@ $ ->
 
 	AddEntryView = Backbone.View.extend(
 		events:
-			"click": "onClick"
+			"click a": "onClick"
 
 		onClick: ->
 			entry = new caps.Entry
 			@model.get("entries").add entry
 
 		render: ->
-			@$el.html("+")
+			@$el.html("<a>+</a>")
 			return this
 	)
 
