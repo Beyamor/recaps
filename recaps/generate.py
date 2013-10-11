@@ -51,6 +51,5 @@ def generate(data):
 %(Culturoid)s
 %(Otheroid)s
 %(Failtoid)s
-
 %(closingisms)s
 """ % caps
