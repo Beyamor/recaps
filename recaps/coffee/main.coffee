@@ -40,11 +40,11 @@ $ ->
 		error: (e) ->
 			alert "Something broke while loading saves!\nTell Beyamor you got a #{e.status}"
 
-	$('body').append $('<button>').click( ->
+	save = (manual) ->
 		data =
 			recapper: recapper.name
 			content: JSON.stringify(recaps.toJSON())
-			manual: true
+			manual: manual
 
 		$.ajax(
 			type: "POST"
@@ -55,6 +55,9 @@ $ ->
 			error: (e) ->
 				alert "Something broke while saving!\nTell Beyamor you got a #{e.status}"
 		)
+
+	$('body').append $('<button>').click( ->
+		save true
 	).css({
 		position: 'fixed'
 		top: '0px'
