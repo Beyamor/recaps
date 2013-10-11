@@ -126,6 +126,8 @@ $ ->
 	)
 
 	CategoryImageView = Backbone.View.extend(
+		className: 'category-image'
+
 		events:
 			"focusout .editing": "finishEditing"
 			"keyup .editing": "onEditingKeyUp"
@@ -133,9 +135,20 @@ $ ->
 			"click .complete": "startEditing"
 
 		initialize: ->
-			@edit = $('<img>').addClass('edit').attr('src', '/static/img/picture32.png').hide()
-			@editing = $('<input type="text">').addClass('editing').hide()
-			@complete = $('<img>').addClass('complete').hide()
+			@edit = $('<img>')
+				.addClass('edit')
+				.attr('src', '/static/img/picture32.png')
+				.attr('title', 'add an image')
+				.hide()
+
+			@editing = $('<input type="text">')
+				.addClass('editing')
+				.hide()
+
+			@complete = $('<img>')
+				.addClass('complete')
+				.attr('title', 'change image')
+				.hide()
 
 			@$el.append(@edit).append(@editing).append(@complete)
 
@@ -168,6 +181,8 @@ $ ->
 	)
 
 	AddEntryView = Backbone.View.extend(
+		className: 'add-entry'
+
 		events:
 			"click a": "onClick"
 
@@ -176,7 +191,9 @@ $ ->
 			@model.get("entries").add entry
 
 		render: ->
-			@$el.html("<a>+</a>")
+			@$el
+				.empty()
+				.append($('<a>+</a>').attr('title', 'add a new entry'))
 			return this
 	)
 
@@ -262,7 +279,7 @@ $ ->
 			$recapperHeader = $('<img>').attr('src', recaps.get('recapper').header)
 			$el.append $recapperHeader
 
-			$el.append $('<textarea>').change(->
+			$el.append $('<textarea>').addClass('isms').change(->
 				recaps.set 'isms', $(this).val()
 			).val(recaps.get 'isms')
 
@@ -274,13 +291,13 @@ $ ->
 				)
 				$el.append categoryView.render().$el
 
-			$el.append $('<textarea>').change(->
+			$el.append $('<textarea>').addClass('closingisms').change(->
 				recaps.set 'closingisms', $(this).val()
 			).val(recaps.get 'closingisms')
 
 			$fpotd = $('<div>')
 				.addClass('fpotd')
-				.append('Final post of the day:')
+				.append('Final post of the day: ')
 				.append($('<input type="text">').change(->
 					recaps.set 'fpotd', $(this).val()
 				).val(recaps.get 'fpotd'))

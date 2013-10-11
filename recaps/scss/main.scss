@@ -74,3 +74,49 @@ select, button {
 		}
 	}
 }
+
+#recaps {
+	width: 620px;
+	@include centered;
+	
+	textarea {
+		display: block;
+		width: 600px;
+		@include centered;
+	}
+
+	.category-image {
+		text-align: center;
+		img {
+			cursor: pointer;
+		}
+	}
+
+	.add-entry {
+		text-align: center;
+		a {
+			font-size: 32px;
+			cursor: pointer;
+		}
+	}
+
+	.fpotd {
+		margin-top: 20px;
+	}
+
+	.isms {
+		min-height: 300px;
+	}
+
+	.closingisms {
+		min-height: 100px;
+	}
+
+	.entry {
+		color: $dtoid-red;
+		margin-top: 10px;
+		span {
+			cursor: pointer;
+		}
+	}
+}
