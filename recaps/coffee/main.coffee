@@ -25,7 +25,7 @@ $ ->
 
 	updateSaves = (updatedSaves) ->
 		for save in updatedSaves
-			if save.manual is "manua"
+			if save.manual is "true"
 				saves.set "manual", save
 			else
 				saves.set "auto", save

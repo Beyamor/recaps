@@ -60,6 +60,6 @@ $ ->
 	Saves = Backbone.Model.extend(
 		defaults:
 			manual: null
-			default: null
+			auto: null
 	)
 	caps.Saves = Saves
