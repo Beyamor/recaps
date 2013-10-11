@@ -311,10 +311,12 @@ $ ->
 					alert "Something broke while loading a save!\nTell Beyamor you got a #{e.status}"
 
 		onManualClick: ->
-			@loadSave(@model.get('manual').id)
+			if confirm("Load manual save from #{@model.get('manual').time}?")
+				@loadSave(@model.get('manual').id)
 
 		onAutoClick: ->
-			@loadSave(@model.get('auto').id)
+			if confirm("Load autosave from #{@model.get('manual').time}?")
+				@loadSave(@model.get('auto').id)
 
 		template: pageTemplate('saves')
 
