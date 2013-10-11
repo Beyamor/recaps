@@ -1,3 +1,10 @@
-def generate(recaps):
-	header = recaps['recapper']['header']
-	return header
+def image(src):
+	return "[img]%s[/img]" % src
+
+def generate(data):
+	caps = {}
+	caps['header'] = image(data['recapper']['header'])
+	return \
+"""
+%(header)s
+""" % caps
