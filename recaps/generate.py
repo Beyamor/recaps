@@ -20,7 +20,7 @@ def category(name, data):
 	result = image(CATEGORIES[name]) + '\n'
 
 	if 'image' in data:
-		result += image(data['image']) + '\n'
+		result += '\n' + image(data['image']) + '\n'
 
 	for entryData in data['entries']:
 		result += '\n' + entry(entryData) + '\n'
