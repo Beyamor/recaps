@@ -56,6 +56,10 @@ $ ->
 				alert "Something broke while saving!\nTell Beyamor you got a #{e.status}"
 		)
 
+	setInterval( ->
+		save false
+	, 300000)
+
 	$('body').append $('<button>').click( ->
 		save true
 	).css({

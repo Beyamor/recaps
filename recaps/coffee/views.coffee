@@ -315,7 +315,7 @@ $ ->
 				@loadSave(@model.get('manual').id)
 
 		onAutoClick: ->
-			if confirm("Load autosave from #{@model.get('manual').time}?")
+			if confirm("Load autosave from #{@model.get('auto').time}?")
 				@loadSave(@model.get('auto').id)
 
 		template: pageTemplate('saves')
