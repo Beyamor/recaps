@@ -20,7 +20,8 @@ def category(name, data):
 def generate(data):
 	caps = {
 			'header': image(data['recapper']['header']),
-			'isms': data['isms']
+			'isms': data['isms'],
+			'closingisms': data['closingisms']
 	}
 
 	for categoryName in CATEGORIES:
@@ -47,4 +48,6 @@ def generate(data):
 %(Otheroid)s
 
 %(Failtoid)s
+
+%(closingisms)s
 """ % caps
