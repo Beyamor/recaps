@@ -105,10 +105,10 @@ $ ->
 			)
 			@views.editing.render()
 
-			@views.complete.hide()
-			@views.complete.show()
-
 			@$el.append(@views.complete.$el).append(@views.editing.$el)
+
+			@views.complete.show()
+			@views.editing.hide()
 
 		startEditing: ->
 			@views.complete.startEditing()
