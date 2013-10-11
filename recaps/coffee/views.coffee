@@ -314,16 +314,11 @@ $ ->
 			'click .manual': 'onManualClick'
 			'click .auto': 'onAutoClick'
 
-		id: 'saves'
+		el: $('#control-panel .saves')
 
 		initialize: ->
 			@recaps = @attributes.recaps
 			@renderOnModelChange()
-			@$el.css(
-				position: 'fixed'
-				top: '0px'
-				left: '0px'
-			)
 
 		loadSave: (which) ->
 			$.ajax

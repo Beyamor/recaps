@@ -3,6 +3,9 @@ $ ->
 	$loginWidget.remove()
 	recapper = (recapper for recapper in recappers when recapper.name is "Beyamor")[0]
 
+	greetings = ["Hi", "Hello", "Hey", "What's up", "Yo"]
+	greeting = greetings[Math.floor(Math.random() * greetings.length)]
+	$('#control-panel .greeting').text(greeting + ', ' + recapper.name)
 	
 	recaps = new caps.Recaps(
 		recapper: recapper
@@ -20,8 +23,6 @@ $ ->
 		attributes:
 			recaps: recaps
 	)
-	$('body').append savesView.$el
-
 
 	updateSaves = (updatedSaves) ->
 		for save in updatedSaves

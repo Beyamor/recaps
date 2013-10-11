@@ -6,19 +6,23 @@
 
 {% call backbone_template('saves') %}
 <% if (manual) { %>
-	<span class="save-type manual">
-		Load last manual save
-	</span>
-	<span class="timestamp">
-		(<%- manual.time %>)
+	<span class="save">
+		<span class="save-type manual" title="load manual save">
+			manual save
+		</span>
+		<span class="timestamp">
+			<%- manual.time %>
+		</span>
 	</span>
 <% } %>
 <% if (auto) { %>
-	<span class="save-type auto">
-		Load last autosave
-	</span>
-	<span class="timestamp">
-		(<%- auto.time %>)
+	<span class="save">
+		<span class="save-type auto" title="load autosave">
+			autosave
+		</span>
+		<span class="timestamp">
+			<%- auto.time %>
+		</span>
 	</span>
 <% } %>
 {% endcall %}

@@ -76,6 +76,7 @@ select, button {
 }
 
 #recaps {
+	margin-top: 100px;
 	width: 620px;
 	@include centered;
 	
@@ -117,6 +118,44 @@ select, button {
 		margin-top: 10px;
 		span {
 			cursor: pointer;
+		}
+	}
+}
+
+#control-panel {
+	background-color: black;
+	color: white;
+	position: fixed;
+	top: 0px;
+	left:  0px;
+	right: 0px;
+	padding: 4px;
+
+	.greeting {
+		display: inline-block;
+		vertical-align: middle;
+		padding-bottom: 14px;
+		padding-left: 10px;
+	}
+
+	.saves {
+		display: inline-block;
+
+		.save {
+			margin-left: 3px;
+			margin-right: 3px;
+
+			display: inline-block;
+
+			.save-type {
+				cursor: pointer;
+			}
+
+			.timestamp {
+				color: #aaa;
+				font-size: x-small;
+				display: block;
+			}
 		}
 	}
 }
