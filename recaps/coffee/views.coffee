@@ -35,15 +35,26 @@ $ ->
 		events:
 			'click .confirm': 'finishEditing'
 			'click .remove': 'remove'
+			'change .description input': 'onDescriptionChange'
+			'change .link input': 'onLinkChange'
+			'change .subcategory': 'onSubcategoryChange'
 
 		initialize: ->
 			@category	= @attributes.category
 			@views		= @attributes.views
 			@entries	= @attributes.entries
-			@renderOnModelChange()
 			@render()
 
-			_(this).bindAll 'remove'
+			_(this).bindAll 'remove', 'onDescriptionChange', 'onLinkChange', 'onSubcategoryChange'
+
+		onDescriptionChange: ->
+			@model.set 'description', @description()
+
+		onLinkChange: ->
+			@model.set 'link', @link()
+
+		onSubcategoryChange: ->
+			@model.set 'subcategory', @subcategory()
 
 		show: ->
 			@$el.show()
@@ -62,11 +73,6 @@ $ ->
 			$(".subcategory", @$el).val()
 
 		finishEditing: ->
-			@model.set
-				description: @description()
-				link: @link()
-				subcategory: @subcategory()
-
 			@hide()
 			@views.complete.show()
 
@@ -206,7 +212,7 @@ $ ->
 			return entryView
 
 		addEntry: (entry) ->
-			entryView = addEntryView(entry)
+			entryView = @addEntryView(entry)
 			@addView.$el.before entryView.$el
 
 			# gotta call this after adding the view
