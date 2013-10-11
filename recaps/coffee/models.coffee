@@ -39,13 +39,15 @@ $ ->
 	)
 
 	Recaps = Backbone.Model.extend(
+		defaults:
+			isms: ""
+			closingisms: ""
+			fpotd: ""
+
 		initialize: ->
 			for category in CATEGORIES
 				categoryModel = new Category
 				@set category.name, categoryModel
-
-			@set "isms", ""
-			@set "closingisms", ""
 
 		update: (attributes) ->
 			for category in CATEGORIES

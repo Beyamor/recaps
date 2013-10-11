@@ -13,8 +13,11 @@ CATEGORIES = {
 def image(src):
 	return "[img]%s[/img]" % src
 
+def url(link, contents):
+	return "[url={0}]{1}[/url]".format(link, contents)
+
 def entry(data):
-	return "[url=%(link)s][b]%(subcategory)s[/b] - %(description)s[/url]" % data
+	return url(data["link"], "[b]%(subcategory)s[/b] - %(description)s" % data)
 
 def category(name, data):
 	result = image(CATEGORIES[name]) + '\n'
@@ -31,7 +34,8 @@ def generate(data):
 	caps = {
 			'header': image(data['recapper']['header']),
 			'isms': data['isms'],
-			'closingisms': data['closingisms']
+			'closingisms': data['closingisms'],
+			'fpotd': url(data['fpotd'], "FPotD")
 	}
 
 	for categoryName in CATEGORIES:
@@ -51,4 +55,6 @@ def generate(data):
 %(Culturoid)s
 %(Otheroid)s
 %(Failtoid)s
-%(closingisms)s""" % caps
+%(closingisms)s
+
+%(fpotd)s""" % caps

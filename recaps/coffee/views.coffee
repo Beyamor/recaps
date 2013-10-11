@@ -278,6 +278,14 @@ $ ->
 				recaps.set 'closingisms', $(this).val()
 			).val(recaps.get 'closingisms')
 
+			$fpotd = $('<div>')
+				.addClass('fpotd')
+				.append('Final post of the day:')
+				.append($('<input type="text">').change(->
+					recaps.set 'fpotd', $(this).val()
+				).val(recaps.get 'fpotd'))
+			$el.append $fpotd
+
 
 			return this
 	)
