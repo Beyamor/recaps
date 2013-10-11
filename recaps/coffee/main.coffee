@@ -73,6 +73,7 @@ $ ->
 	}).text("model")
 
 	$('body').append $('<button>').click(->
+		save false
 		caps.generate(recaps.toJSON())
 	).css(
 		position: 'fixed'
