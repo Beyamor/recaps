@@ -76,7 +76,7 @@ select, button {
 }
 
 #recaps {
-	margin-top: 100px;
+	margin-top: 80px;
 	width: 620px;
 	@include centered;
 	
@@ -129,21 +129,31 @@ select, button {
 	top: 0px;
 	left:  0px;
 	right: 0px;
-	padding: 4px;
+	padding: 15px 10px;
+	text-align: center;
+
+	>div {
+		display: inline-block;
+	}
 
 	.greeting {
-		display: inline-block;
-		vertical-align: middle;
-		padding-bottom: 14px;
-		padding-left: 10px;
+		float: left;
+	}
+
+	.main-stuff {
+		float: right;
+		div {
+			display: inline-block;
+			cursor: pointer;
+			margin-left: 20px;
+		}
 	}
 
 	.saves {
-		display: inline-block;
-
+		margin: 0 auto;
 		.save {
-			margin-left: 3px;
-			margin-right: 3px;
+			margin-left: 6px;
+			margin-right: 6px;
 
 			display: inline-block;
 
@@ -154,8 +164,13 @@ select, button {
 			.timestamp {
 				color: #aaa;
 				font-size: x-small;
-				display: block;
+				//display: block;
+				display: none;
 			}
 		}
 	}
 }
+
+.action:hover {
+		color: #4998DE;
+	}

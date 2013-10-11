@@ -193,7 +193,7 @@ $ ->
 		render: ->
 			@$el
 				.empty()
-				.append($('<a>+</a>').attr('title', 'add a new entry'))
+				.append($('<a>+</a>').attr('title', 'add a new entry').addClass('action'))
 			return this
 	)
 

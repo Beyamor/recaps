@@ -3,9 +3,9 @@ $ ->
 	$loginWidget.remove()
 	recapper = (recapper for recapper in recappers when recapper.name is "Beyamor")[0]
 
-	greetings = ["Hi", "Hello", "Hey", "What's up", "Yo"]
+	greetings = ["hi", "hey", "what's up", "yo"]
 	greeting = greetings[Math.floor(Math.random() * greetings.length)]
-	$('#control-panel .greeting').text(greeting + ', ' + recapper.name)
+	$('#control-panel .greeting').text(greeting + ' ' + recapper.name)
 	
 	recaps = new caps.Recaps(
 		recapper: recapper
@@ -61,30 +61,22 @@ $ ->
 		save false
 	, 300000)
 
-	$('body').append $('<button>').click( ->
+	$('#control-panel .save').click( ->
 		save true
-	).css({
-		position: 'fixed'
-		top: '0px'
-		right: '0px'
-	}).text('save')
+	)
 
-	$('body').append $("<button>").click( ->
-		console.log JSON.stringify(recaps.toJSON())
-	).css({
-		position: "fixed"
-		top: "25px"
-		right: "0px"
-	}).text("model")
+	#$('body').append $("<button>").click( ->
+	#	console.log JSON.stringify(recaps.toJSON())
+	#).css({
+	#	position: "fixed"
+	#	top: "25px"
+	#	right: "0px"
+	#}).text("model")
 
-	$('body').append $('<button>').click(->
+	$('#control-panel .generate').click(->
 		save false
 		caps.generate(recaps.toJSON())
-	).css(
-		position: 'fixed'
-		top: '50px'
-		right: '0px'
-	).text('generate')
+	)
 
 	#$('button', $loginWidget).click ->
 	#	$loginWidget.remove()
