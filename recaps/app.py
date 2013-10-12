@@ -120,5 +120,15 @@ def generate_recaps():
 	recaps = generate(json.loads(request.args['data']))
 	return render_template('generate.html', recaps=recaps)
 
+@app.route('/recappers')
+def recappers():
+	cur = g.db.execute("select name from recappers")
+	recappers = []
+	for row in cur.fetchall():
+		recappers.append(row[0])
+	
+	return json.dumps(recappers)
+
+
 if __name__ == "__main__":
 	app.run(debug=True)

@@ -187,6 +187,9 @@ if (!document.getElementById("wits-recap-widget")) {
 
 	var close = function() { document.body.removeChild(widget); }
 
+	var recappers = createSelector(RECAPPERS);
+	widget.appendChild(recappers);
+
 	var categoriesContainer = document.createElement("div");
 	widget.appendChild(categoriesContainer);
 
@@ -225,6 +228,7 @@ if (!document.getElementById("wits-recap-widget")) {
 	confirmButton = createButton("Recap", function() {
 
 		var result = {
+			recapper: recappers.value,
 			description: description.value,
 			category: categories.value,
 			subcategory: (subcategories? subcategories.value : null),
@@ -238,7 +242,7 @@ if (!document.getElementById("wits-recap-widget")) {
 				close();
 			},
 			onFailure: function(errorCode) {
-				alert("Something broke!\nGo tell Beyamor you got a " + errorCode);
+				alert("Something broke send the entry!\nGo tell Beyamor you got a " + errorCode);
 			}
 		});
 	});
