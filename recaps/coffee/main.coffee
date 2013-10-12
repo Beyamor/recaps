@@ -3,9 +3,7 @@ $ ->
 	$loginWidget.remove()
 	recapper = (recapper for recapper in recappers when recapper.name is "Beyamor")[0]
 
-	greetings = ["hi", "hey", "what's up", "yo"]
-	greeting = greetings[Math.floor(Math.random() * greetings.length)]
-	$('#control-panel .greeting').text(greeting + ' ' + recapper.name)
+	$('#control-panel .greeting').text(recapper.name)
 	
 	recaps = new caps.Recaps(
 		recapper: recapper
