@@ -28,6 +28,52 @@
 		<!-- Templates for the views -->
 		{% include 'main-views.html' %}
 
+		<!-- The legend -->
+		<ul id="legend">
+			<li class="l_section">WORDtoid</li>
+			<li>A - Articles</li>
+			<li>S - Series</li>
+			<li>M - Monthly Musings</li>
+			<li>P - Podcasts</li>
+			<li class="l_section">CONTEStoid</li>
+			<li>C - Community Contests</li>
+			<li>W - Winners/Updates</li>
+			<li>E - Entries</li>
+			<li class="l_section">COMMUNItoid</li>
+			<li>E - Events</li>
+			<li>F - Friday Nights</li>
+			<li>D - Destructoid in the Wild</li>
+			<li>S - Stories</li>
+			<li>C - Contemplations</li>
+			<li>I - Introductions</li>
+			<li>B - Birthdays</li>
+			<li>R - RIP</li>
+			<li>H - Houses, cribs, setups</li>
+			<li class="l_section">GAMEtoid</li>
+			<li>N - News</li>
+			<li>V - Videos</li>
+			<li>R - Reviews</li>
+			<li>P - Previews</li>
+			<li>T - Thoughts</li>
+			<li>D - Development</li>
+			<li>$ - Deals</li>
+			<li class="l_section">CULTUroid</li>
+			<li>A - Art</li>
+			<li>M - Music</li>
+			<li>F - Film/TV</li>
+			<li>L - Literature</li>
+			<li>S - Swag</li>
+			<li class="l_section">OTHEroid</li>
+			<li>L - LOLs</li>
+			<li>R - Random</li>
+			<li>V - Videos</li>
+			<li>C - Could Be Better</li>
+			<li>? - Defies Description</li>
+			<li class="l_section">FAILtoid</li>
+			<li>S - You Are Slow</li>
+			<li>F - Maybe Fail?</li>
+		</ul>
+
 		<!-- Our actual recaps -->
 		<div id="recaps">
 		</div>
@@ -56,7 +102,7 @@
 				<p>Sign in:</p>
 				<select class="recapper">
 					{% for recapper in recappers %}
-						<option value="{{ recapper['id'] }}">{{ recapper['name'] }}</option>
+					<option value="{{ recapper['id'] }}">{{ recapper['name'] }}</option>
 					{% endfor %}
 				</select>
 				<button type="button">Go</button>

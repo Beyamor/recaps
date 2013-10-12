@@ -79,7 +79,7 @@ select, button {
 	margin-top: 80px;
 	width: 620px;
 	@include centered;
-	
+
 	textarea {
 		display: block;
 		width: 600px;
@@ -171,5 +171,22 @@ select, button {
 }
 
 .action:hover {
-		color: #4998DE;
+	color: #4998DE;
+}
+
+#legend {
+	position: absolute;
+	top: 80px;
+	right: 10px;
+	list-style-type: none;
+
+	li {
+		margin-left: 5px;
 	}
+
+	.l_section {
+		font-weight: bold;
+		margin-left: 0px;
+		margin-top: 10px;
+	}
+}
