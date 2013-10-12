@@ -67,7 +67,7 @@ $ ->
 			data:
 				recapper: recapper.name
 			success: (entries) ->
-				console.log entries
+				recaps.addEntries JSON.parse entries
 			error: (e) ->
 				alert "Something broke while retrieving entries!\nTell Beyamor you got a #{e.status}"
 		)

@@ -5,7 +5,7 @@ create table posted_entries (
 	category text not null,
 	subcategory text,
 	description text not null,
-	url text not null,
+	link text not null,
 	foreign key(recapper) references recappers(name)
 );
 

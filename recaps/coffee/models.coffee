@@ -58,6 +58,11 @@ $ ->
 				attributes[category.name] = categoryModel
 
 			@set attributes
+
+		addEntries: (entries) ->
+			for entry in entries when @get('receivedEntries').indexOf(entry.id) == -1
+				@get('receivedEntries').push entry.id
+				@get(entry.category).get('entries').add new Entry entry
 	)
 	caps.Recaps = Recaps
 

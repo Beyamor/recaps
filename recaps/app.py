@@ -35,20 +35,20 @@ def teardown_request(exception):
 @app.route("/recap-entry", methods=["POST"])
 def post_recap_entry():
 	entry = json.loads(request.data)
-	g.db.execute("insert into posted_entries (recapper, category, subcategory, description, url) values (?, ?, ?, ?, ?)",
+	g.db.execute("insert into posted_entries (recapper, category, subcategory, description, link) values (?, ?, ?, ?, ?)",
 			[
 				entry["recapper"],
 				entry["category"],
 				entry["subcategory"],
 				entry["description"],
-				entry["url"]
+				entry["link"]
 				])
 	g.db.commit()
 	return "Good jorb"
 
 @app.route("/recap-entries")
 def get_recap_entries():
-	cur = g.db.execute("select id, category, subcategory, description, url from posted_entries " +
+	cur = g.db.execute("select id, category, subcategory, description, link from posted_entries " +
 				"where recapper=? " +
 				"order by id desc", [
 					request.args['recapper']
@@ -60,14 +60,14 @@ def get_recap_entries():
 			"category": row[1],
 			"subcategory": row[2],
 			"description": row[3],
-			"url": row[4]
+			"link": row[4]
 			})
 
 	return json.dumps(entries)
 
 @app.route("/show-entries")
 def show_entries():
-	cur = g.db.execute("select recapper, category, subcategory, description, url from posted_entries order by id desc")
+	cur = g.db.execute("select recapper, category, subcategory, description, link from posted_entries order by id desc")
 	entries = []
 	for row in cur.fetchall():
 		entries.append({
@@ -75,7 +75,7 @@ def show_entries():
 			"category": row[1],
 			"subcategory": row[2],
 			"description": row[3],
-			"url": row[4]
+			"link": row[4]
 			})
 
 	return str(entries)

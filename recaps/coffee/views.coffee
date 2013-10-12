@@ -234,7 +234,8 @@ $ ->
 
 			# gotta call this after adding the view
 			# so the field can get focus
-			entryView.startEditing()
+			if entry.get('description').length is 0 or entry.get('link').length is 0
+				entryView.startEditing()
 
 		removeEntry: (entry) ->
 			viewToRemove = _(@entryViews).select((v) -> v.model == entry)[0]
