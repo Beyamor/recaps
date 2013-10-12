@@ -3,10 +3,10 @@
  */
 function checkForValidUrl(tabId, changeInfo, tab) {
 
-	var	matchExpression	= /^(http:\/\/)?www.destructoid.com\/blogs\/.+/,
+	var	matchExpression	= /^(https?:\/\/)?www.destructoid.com\/blogs\/.+/,
 		urlMatches	= matchExpression.test(tab.url);
 
-	if (urlMatches || true) {
+	if (urlMatches) {
 		
 		chrome.pageAction.show(tabId);
 	}
