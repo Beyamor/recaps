@@ -58,7 +58,7 @@ $ ->
 
 		show: ->
 			@$el.show()
-			$('.description input', @$el).focus()
+			$('.link input', @$el).focus()
 
 		hide: ->
 			@$el.hide()

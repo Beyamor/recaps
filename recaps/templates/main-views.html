@@ -38,11 +38,11 @@
 
 {% call backbone_template('editing-entry') %}
 <div class="editing-entry">
-	<div class="description">
-		Description: <input type="text" value="<%- description %>"/>
-	</div>
 	<div class="link">
 		Link: <input type="text" value="<%- link %>"/>
+	</div>
+	<div class="description">
+		Description: <input type="text" value="<%- description %>"/>
 	</div>
 	<select class="subcategory">
 		<% for (var subcategory in subcategories) { %>
