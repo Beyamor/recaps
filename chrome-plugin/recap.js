@@ -93,7 +93,7 @@ function createButton(label, onClick) {
 	return button;
 };
 
-function createSelector(options, onChange) {
+function createSelector(options, onChange, defaultValue) {
 
 	var selector = document.createElement("select");
 	for (var optionIndex = 0; optionIndex < options.length; ++optionIndex) {
@@ -115,6 +115,9 @@ function createSelector(options, onChange) {
 
 		optionEl.textContent = label;
 		optionEl.setAttribute("value", value);
+		if (value == defaultValue) {
+			optionEl.setAttribute('selected', 'selected');
+		}
 
 		selector.appendChild(optionEl);
 	}
@@ -187,7 +190,7 @@ if (!document.getElementById("wits-recap-widget")) {
 
 	var close = function() { document.body.removeChild(widget); }
 
-	var recappers = createSelector(RECAPPERS);
+	var recappers = createSelector(RECAPPERS, null, defaultRecapper);
 	widget.appendChild(recappers);
 
 	var categoriesContainer = document.createElement("div");
@@ -236,7 +239,7 @@ if (!document.getElementById("wits-recap-widget")) {
 		};
 
 		postJSON({
-			url: "http://localhost:5000/recap-entry",
+			url: "http://recaps.wordsinthesky.com:5000/recap-entry",
 			data: result,
 			onSuccess: function() {
 				close();
@@ -245,6 +248,8 @@ if (!document.getElementById("wits-recap-widget")) {
 				alert("Something broke send the entry!\nGo tell Beyamor you got a " + errorCode);
 			}
 		});
+
+		chrome.runtime.sendMessage({message: 'set-wits-recapper', recapper: recappers.value});
 	});
 	confirmButton.disabled = true;
 	setAsBlock(confirmButton);
