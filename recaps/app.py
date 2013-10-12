@@ -37,7 +37,7 @@ def post_recap_entry():
 	entry = json.loads(request.data)
 	g.db.execute("insert into posted_entries (recapper, category, subcategory, description, url) values (?, ?, ?, ?, ?)",
 			[
-				"Beyamor",
+				entry["recapper"],
 				entry["category"],
 				entry["subcategory"],
 				entry["description"],
