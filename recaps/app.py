@@ -109,6 +109,13 @@ def get_saves():
 @app.route("/saves", methods=["POST"])
 def save_recaps():
 	data = request.form
+	recaps = json.loads(data['content'])
+
+	# delete any received entries
+	receivedIds = recaps['receivedEntries']
+	collectionDescription = "(" + ",".join(["?"] * len(receivedIds)) + ")"
+	g.db.execute("delete from posted_entries where id in " + collectionDescription,
+			receivedIds)
 
 	# Whatever. Uh. We're going to give 'em one manual and one auto save
 	g.db.execute('delete from recaps where recapper=? and manual=?', [
@@ -121,6 +128,7 @@ def save_recaps():
 		data['content'],
 		data['manual']
 	])
+
 	g.db.commit()
 
 	return recapper_save_data(data['recapper'])
