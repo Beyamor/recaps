@@ -1,5 +1,5 @@
 CATEGORIES = {
-		"Topsauce": "http://farm3.static.flickr.com/2777/4068256421_cf820647b2_o.jpg",
+		"Topsaucetoid": "http://farm3.static.flickr.com/2777/4068256421_cf820647b2_o.jpg",
 		"Wordtoid": "http://farm3.static.flickr.com/2800/4069011354_b7e15681cd_o.jpg",
 		"Contestoid": "http://farm3.static.flickr.com/2708/4068256087_e691dde06e_o.jpg",
 		"Communitoid": "http://farm3.static.flickr.com/2615/4069011212_6af1534a1c_o.jpg",
@@ -47,7 +47,7 @@ def generate(data):
 
 %(isms)s
 
-%(Topsauce)s
+%(Topsaucetoid)s
 %(Wordtoid)s
 %(Contestoid)s
 %(Communitoid)s

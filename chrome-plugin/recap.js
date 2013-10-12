@@ -234,7 +234,7 @@ if (!document.getElementById("wits-recap-widget")) {
 			recapper: recappers.value,
 			description: description.value,
 			category: categories.value,
-			subcategory: (subcategories? subcategories.value : null),
+			subcategory: (subcategories? subcategories.value : "*"),
 			link: window.location.href
 		};
 
