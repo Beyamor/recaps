@@ -228,7 +228,7 @@ if (!document.getElementById("wits-recap-widget")) {
 	setAsBlock(description);
 	widget.appendChild(description);
 
-	confirmButton = createButton("Recap", function() {
+	submit = function() {
 
 		var result = {
 			recapper: recappers.value,
@@ -250,7 +250,9 @@ if (!document.getElementById("wits-recap-widget")) {
 		});
 
 		chrome.runtime.sendMessage({message: 'set-wits-recapper', recapper: recappers.value});
-	});
+	}
+
+	confirmButton = createButton("Recap", submit);
 	confirmButton.disabled = true;
 	setAsBlock(confirmButton);
 	widget.appendChild(confirmButton);
@@ -262,6 +264,14 @@ if (!document.getElementById("wits-recap-widget")) {
 	});
 	setAsBlock(closeButton);
 	widget.appendChild(closeButton);
+
+	widget.onkeyup = function(e) {
+
+		if (e.keyCode == 13 && description.length != 0) {
+
+			submit();
+		}
+	}
 
 	document.body.appendChild(widget);
 }
