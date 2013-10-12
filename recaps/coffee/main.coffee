@@ -60,7 +60,7 @@ $ ->
 		save false
 	, 5 * 60 * 1000)
 
-	setInterval( ->
+	getPostedEntries = ->
 		$.ajax(
 			type: "GET"
 			url: "/recap-entries"
@@ -71,7 +71,9 @@ $ ->
 			error: (e) ->
 				alert "Something broke while retrieving entries!\nTell Beyamor you got a #{e.status}"
 		)
-	, 2 * 1000)
+
+	setInterval(getPostedEntries, 2 * 1000)
+	getPostedEntries()
 
 	$('#control-panel .save').click( ->
 		save true
