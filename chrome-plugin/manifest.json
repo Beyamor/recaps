@@ -3,7 +3,7 @@
 
 	"name": "Recapper",
 	"description": "A tool for recapping Destructoid c-blogs.",
-	"version": "1 .0",
+	"version": "1.0",
 
 	"background": {
 		"scripts": [
