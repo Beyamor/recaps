@@ -142,9 +142,9 @@ def get_save():
 	# Yo, remember, that should already be perfectly good JSON
 	return cur.fetchone()[0]
 
-@app.route('/generate')
+@app.route('/generate', methods=['POST'])
 def generate_recaps():
-	recaps = generate(json.loads(request.args['data']))
+	recaps = generate(json.loads(request.form['data']))
 	return render_template('generate.html', recaps=recaps)
 
 @app.route('/recappers')
