@@ -1,8 +1,4 @@
-$ ->
-	$loginWidget = $('#login-widget')
-	$loginWidget.remove()
-	recapper = (recapper for recapper in recappers when recapper.name is "Beyamor")[0]
-
+launch = (recapper) ->
 	$('#control-panel .greeting').text(recapper.name)
 	
 	recaps = new caps.Recaps(
@@ -89,16 +85,13 @@ $ ->
 		caps.generate(recaps.toJSON())
 	)
 
-	#$('button', $loginWidget).click ->
-	#	$loginWidget.remove()
+$ ->
+	$loginWidget = $('#login-widget')
 
-	#	id = $('select', $loginWidget).val()
-	#	recapper = new Recapper recappers[id]
-	#	$('#header').attr('src', recapper.get('header'))
+	$('button', $loginWidget).click ->
+		$loginWidget.remove()
 
-	#	recaps = new Recaps
-	#	view = new RecapsView(
-	#		model: recaps
-	#	)
+		name = $('select', $loginWidget).val()
 
-	#	view.render()
+		for recapper in recappers when recapper.name is name
+			launch recapper
