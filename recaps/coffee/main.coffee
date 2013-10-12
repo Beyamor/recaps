@@ -41,6 +41,11 @@ $ ->
 			alert "Something broke while loading saves!\nTell Beyamor you got a #{e.status}"
 
 	save = (manual) ->
+		if manual
+			$('#control-panel .manual .save-type').text('saving...')
+		else
+			$('#control-panel .auto .save-type').text('saving...')
+
 		data =
 			recapper: recapper.name
 			content: JSON.stringify(recaps.toJSON())
