@@ -26,6 +26,7 @@ $ ->
 
 	updateSaves = (updatedSaves) ->
 		for save in updatedSaves
+			save.time = new Date(Date.parse(save.time + ' UTC'))
 			if save.manual is "true"
 				saves.set "manual", save
 			else

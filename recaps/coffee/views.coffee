@@ -311,8 +311,8 @@ $ ->
 
 	SavesView = Backbone.View.extend(
 		events:
-			'click .manual': 'onManualClick'
-			'click .auto': 'onAutoClick'
+			'click .manual .save-type': 'onManualClick'
+			'click .auto .save-type': 'onAutoClick'
 
 		el: $('#control-panel .saves')
 

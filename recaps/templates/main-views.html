@@ -6,8 +6,8 @@
 
 {% call backbone_template('saves') %}
 <% if (manual) { %>
-	<span class="save">
-		<span class="save-type manual action" title="load manual save">
+	<span class="save manual">
+		<span class="save-type action" title="<%- manual.time %>">
 			load manual save
 		</span>
 		<span class="timestamp">
@@ -16,8 +16,8 @@
 	</span>
 <% } %>
 <% if (auto) { %>
-	<span class="save">
-		<span class="save-type auto action" title="load autosave">
+	<span class="save auto">
+		<span class="save-type action" title="<%- auto.time %>">
 			load autosave
 		</span>
 		<span class="timestamp">
