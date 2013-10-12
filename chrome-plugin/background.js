@@ -56,7 +56,8 @@ request.onreadystatechange = function() {
 			alert("Something broke fetching the recapper list!\nGo tell Beyamor you got a " + request.status);
 	}
 }
-request.open("GET", "http://localhost:5000/recappers", true);
+//request.open("GET", "http://localhost:5000/recappers", true);
+request.open("GET", "http://recaps.wordsinthesky.com/recappers", true);
 request.send();
 
 /**

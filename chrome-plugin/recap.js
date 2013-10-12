@@ -239,7 +239,8 @@ if (!document.getElementById("wits-recap-widget")) {
 		};
 
 		postJSON({
-			url: "http://localhost:5000/recap-entry",
+			//url: "http://localhost:5000/recap-entry",
+			url: "http://recaps.wordsinthesky.com/recap-entry",
 			data: result,
 			onSuccess: function() {
 				close();
