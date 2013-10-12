@@ -58,19 +58,24 @@ $ ->
 
 	setInterval( ->
 		save false
-	, 300000)
+	, 5 * 60 * 1000)
+
+	setInterval( ->
+		$.ajax(
+			type: "GET"
+			url: "/recap-entries"
+			data:
+				recapper: recapper.name
+			success: (entries) ->
+				console.log entries
+			error: (e) ->
+				alert "Something broke while retrieving entries!\nTell Beyamor you got a #{e.status}"
+		)
+	, 2 * 1000)
 
 	$('#control-panel .save').click( ->
 		save true
 	)
-
-	#$('body').append $("<button>").click( ->
-	#	console.log JSON.stringify(recaps.toJSON())
-	#).css({
-	#	position: "fixed"
-	#	top: "25px"
-	#	right: "0px"
-	#}).text("model")
 
 	$('#control-panel .generate').click(->
 		save false

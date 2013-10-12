@@ -43,6 +43,7 @@ $ ->
 			isms: ""
 			closingisms: ""
 			fpotd: ""
+			receivedEntries: []
 
 		initialize: ->
 			for category in CATEGORIES
