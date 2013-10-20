@@ -20,7 +20,7 @@ $ ->
 		defaults:
 			link: ""
 			description: ""
-			subcategory: "*"
+			subcategory: ""
 	)
 	caps.Entry = Entry
 
@@ -47,13 +47,13 @@ $ ->
 
 		initialize: ->
 			for category in CATEGORIES
-				categoryModel = new Category
+				categoryModel = new Category category
 				@set category.name, categoryModel
 
 		update: (attributes) ->
 			for category in CATEGORIES
 				categoryAttributes = attributes[category.name]
-				categoryModel = new Category
+				categoryModel = new Category category
 				categoryModel.update categoryAttributes
 				attributes[category.name] = categoryModel
 

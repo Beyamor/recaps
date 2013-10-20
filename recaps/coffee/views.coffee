@@ -188,6 +188,7 @@ $ ->
 
 		onClick: ->
 			entry = new caps.Entry
+				subcategory: @model.get('subcategories')[0][0]
 			@model.get("entries").add entry
 
 		render: ->
