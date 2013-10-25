@@ -5,4 +5,4 @@ $ ->
 				'<input type="hidden" name="data">' +
 			'</form>')
 		$('input', $form).val(data)
-		$form.submit()
+		$form.appendTo("body").submit().remove()
