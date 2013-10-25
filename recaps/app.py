@@ -3,6 +3,8 @@ import sqlite3
 from flask import Flask, Response, request, g, render_template
 from contextlib import closing
 from datetime import datetime
+import time
+import email
 from generate import generate
 
 # default configuration junk
@@ -98,7 +100,7 @@ def recapper_save_data(recapper):
 		result.append({
 			'id': row[0],
 			'manual': row[1],
-			'time': row[2]
+			'time': row[2].replace("-", "/") + " UTC"
 			})
 	return json.dumps(result)
 
