@@ -35,3 +35,7 @@ insert into recappers (name, header) values ("smurfee mcfee", "http://i224.photo
 insert into recappers (name, header) values ("PhilKenSebben", "http://i.imgur.com/pLuvV.jpg");
 insert into recappers (name, header) values ("Jinx01", "http://www.destructoid.com//ul/user/2/25438-255803-cbjinxisms02jpg-620x.jpg");
 insert into recappers (name, header) values ("TheManchild", "http://i230.photobucket.com/albums/ee86/joelphosis/mangasms.jpg~original");
+insert into recappers (name, header) values ("Glowbear", "http://i.imgur.com/v9S1BQf.jpg");
+insert into recappers (name, header) values ("Crackity Jones", "http://i.imgur.com/ocYFFJl.jpg");
+insert into recappers (name, header) values ("Dreamweaver", "http://i.imgur.com/EQvAXeu.jpg");
+insert into recappers (name, header) values ("Pixelated", "http://i.imgur.com/7jEuSni.jpg");
