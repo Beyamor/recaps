@@ -16,7 +16,7 @@ window.caps.CATEGORIES = [{
 	]
 }, {
 	name: "Contestoid",
-	header: "http://farm3.static.flickr.com/2708/4068256087_e691dde06e_o.jpg",
+	header: "https://www.destructoid.com/ul/user/2/25438-444441-ContestoidBannerjpg-noscale.jpg",
 	subcategories: [
 		["C", "Community Contents"],
 		["W", "Winnders/Updates"],
